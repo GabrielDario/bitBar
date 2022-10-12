@@ -1,0 +1,25 @@
+body {
+    text-align: center;
+    background-image: url(background.webp);
+}
+.mesas p{
+    color: white;
+    font-size: 40px;
+}
+h1{
+    color: white;
+}
+.produtos {
+    display: none;;
+}
+table {
+    border: 1px solid black;
+    display: inline-grid;
+}
+.primeiraTabela {
+    border: 1px solid black;
+  
+}
+td {
+    padding: 0 25px;
+}

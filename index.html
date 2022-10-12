@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <script src="script.js"></script>
+    <title>BIT BAR</title>
+</head>
+
+<body id="body">
+    <h1>Monte seu restaurente</h1>
+    <div class="mesas">
+        <p>Quantas mesas seu restaurente tem? 0 a 50   </p><input type="number" id="numMesas">
+        <input type="button" value="Enviar" onclick="qntMesas();">
+    </div>
+    <div class="produtos">
+        Nome prato para cadastrar?   <input type="text" id="nomeProduto"><br><br>
+        Valor do produto?   <input type="number" id="precoProduto"><br><br>
+        <input type="button" value="Cadastrar" onclick="cadastrarProdutos();"><br><br>
+   
+        <input type="button" value="Terminar produtos" onclick="terminarProduros();">
+        <br><br>
+        <h2>Produtos cadastrados</h2>
+        <table id="tabela">
+            <tr style="border: 1px solid black;">
+                <td style="border: 1px solid black;"><b>Produto</b></td>
+                <td style="border: 1px solid black;"><b>Valor</b></td>
+            </tr>
+           
+        </table>
+        
+    </div>
+</body>
+
+</html>
