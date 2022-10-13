@@ -13,15 +13,26 @@
 <body id="body">
     <h1>Monte seu restaurente</h1>
     <div class="mesas">
-        <p>Quantas mesas seu restaurente tem? 0 a 50   </p><input type="number" id="numMesas">
+        <p>Quantas mesas seu restaurente tem? 0 a 50 </p><input type="number" id="numMesas">
         <input type="button" value="Enviar" onclick="qntMesas();">
     </div>
     <div class="produtos">
-        Nome prato para cadastrar?   <input type="text" id="nomeProduto"><br><br>
-        Valor do produto?   <input type="number" id="precoProduto"><br><br>
-        <input type="button" value="Cadastrar" onclick="cadastrarProdutos();"><br><br>
-   
-        <input type="button" value="Terminar produtos" onclick="terminarProduros();">
+        <ul>
+            <li style="background-color: dimgray;opacity: 0.6;">
+                <h2 >Adicionar produtos</a></h2>
+            </li>
+            <li>
+                <h2 onclick="irMesas();">Mesas</h2>
+            </li>
+            <li>
+                <h2 onclick="comandar();">Comandar</h2>
+            </li>
+        </ul>
+        <p>Nome do produto para cadastrar?</p> <input type="text" id="nomeProduto"><br><br>
+        <p>Valor do produto?</p> <input type="number" id="precoProduto"><br><br>
+        <input type="button" value="Cadastrar" onclick="adicionarProdutos();"><br><br>
+
+        <input type="button" value="Terminar produtos" onclick="irMesas();">
         <br><br>
         <h2>Produtos cadastrados</h2>
         <table id="tabela">
@@ -29,9 +40,49 @@
                 <td style="border: 1px solid black;"><b>Produto</b></td>
                 <td style="border: 1px solid black;"><b>Valor</b></td>
             </tr>
-           
+
         </table>
-        
+
+    </div>
+    <div class="todasAsMesas">
+    
+        <ul>
+            <li>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
+            </li>
+            <li style="background-color: dimgray;opacity: 0.6;">
+                <h2 >Mesas</h2>
+            </li>
+            <li>
+                <h2 onclick="comandar();">Comandar</h2>
+            </li>
+        </ul>
+        <br>
+        <h3>Consultar mesa:  <input type="text" id="numMesa" class="buttonMesa">
+            <input type="button" value="Consultar" ></h3>
+       
+    </div>
+    <div class="comandar">
+        <ul>
+            <li>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
+            </li>
+            <li>
+                <h2 onclick="irMesas();">Mesas</h2>
+            </li>
+            <li  style="background-color: dimgray;opacity: 0.6;">
+                <h2>Comandar</h2>
+            </li>
+        </ul>
+        <h3>Comandar mesa:  <input type="text" id="mesaComandar" class="buttonMesa"> </h3>
+            <select id="produtoNaLista">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+              </select>
+              <br><br>
+              <input type="button" value="Lançar" onclick="lancarProduto();">
     </div>
 </body>
 

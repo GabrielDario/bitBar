@@ -2,24 +2,53 @@ body {
     text-align: center;
     background-image: url(background.webp);
 }
-.mesas p{
-    color: white;
-    font-size: 40px;
+h1 {
+    color: darkblue;
+    font-family: cursive;
 }
-h1{
+h2 {
+    color: cornflowerblue;
+}
+p {
     color: white;
 }
-.produtos {
-    display: none;;
+td {
+    padding: 0 25px;
+    background: darkgray;
 }
 table {
     border: 1px solid black;
     display: inline-grid;
 }
-.primeiraTabela {
-    border: 1px solid black;
-  
+.mesas p {
+    font-size: 40px;
 }
-td {
-    padding: 0 25px;
+.produtos p {
+    display: contents;
+    font-size: 20px;
+}
+
+.produtos ,.todasAsMesas, .comandar{
+    display: none;
+}
+.produtos li, .todasAsMesas li , .comandar li{
+    display: inline-block;
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.produtos li:hover,.todasAsMesas li:hover , .comandar li:hover{
+    background-color: dimgray;
+    opacity: 0.6;
+}
+.todasAsMesas button {
+    margin: 20px 20px;
+    height: 45px;
+    width: 45px;
+}
+.todasAsMesas h3, .comandar h3 {
+    color: white;
+}
+.buttonMesa {
+    width: 30px;
 }
