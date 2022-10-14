@@ -101,30 +101,53 @@ function consultarMesa() {
     let numMesa = document.getElementById("numMesa").value;
     let consumo = document.getElementById("consumo");
     let gorgeta = document.getElementById("gorgeta");
+    let consultar = document.getElementById("consultar");
     let total = document.getElementById("total");
-
+    let valorTotal = 0;
+    let gorgetaValor = 0;
     numMesa = Number(numMesa);
 
-   // console.log(numMesas[numMesa].length);
-    console.log(numMesa);
-  //  console.log(numMesas);
+
     if (numMesa > 1 && numMesa <= numMesas.length) {
         numMesa = numMesa - 1;
+        //console.log(numMesas[numMesa].length);
         if (numMesas[numMesa].length === 0) {
             alert("Mesa vazia!");
         } else {
-            alert("TEM ALGO AI!");
+            for (let percorrendoMessas = 0; percorrendoMessas < numMesas[numMesa].length; percorrendoMessas++) {
+                let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]);
+                valorTotal = valorTotal + numeroDaVez;
+            }
+            consultar.textContent = `CONTA DA MESA ${numMesa + 1}`;
+            consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
+            gorgetaValor = valorTotal * 0.1;
+            gorgeta.textContent = `TAXA DE SERVIÇO: R$ ${gorgetaValor.toFixed(2)}`;
+            valorTotal = valorTotal + gorgetaValor;
+            total.textContent = `TOTAL: R$ ${valorTotal.toFixed(2)}`;
+
         }
-    }else if(numMesa == 1) {
-        if (numMesas[numMesa-1].length === 0) {
-            alert("Mesa vazia!");
+    } else if (numMesa == 1) {
+        if (numMesas[numMesa - 1].length === 0) {
+            alert("Mesa vazia");
         } else {
-            alert("TEM ALGO AI!");
+            numMesa = 0;
+            for (let percorrendoMessas = 0; percorrendoMessas < numMesas[numMesa].length; percorrendoMessas++) {
+                let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]);
+                valorTotal = valorTotal + numeroDaVez;
+            }
+            numMesa = numMesa + 1;
+            consultar.textContent = `CONTA DA MESA ${numMesa}`;
+            consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
+            gorgetaValor = valorTotal * 0.1;
+            gorgeta.textContent = `TAXA DE SERVIÇO: R$ ${gorgetaValor.toFixed(2)}`;
+            valorTotal = valorTotal + gorgetaValor;
+            total.textContent = `TOTAL: R$ ${valorTotal.toFixed(2)}`;
+
         }
     } else {
         alert("Mesa invalida!");
     }
-  
+
 }
 function comandar() {
     let numMesasHTML = document.querySelector(".todasAsMesas");
