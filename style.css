@@ -13,8 +13,10 @@ p {
     color: white;
 }
 td {
-    padding: 0 25px;
+    padding: 0px 25px;
+    width: 130px;
     background: darkgray;
+    height: 27px;
 }
 table {
     border: 1px solid black;
