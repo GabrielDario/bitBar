@@ -2,7 +2,9 @@ let numMesas = [];
 let produtosLista = [];
 let precoLista = [];
 let numMesasHTML;
-var numeroMesas = 1;
+let numeroMesas = 1;
+let contadorProdutos = 0;
+let contadorComandar = 0;
 
 function qntMesas() {
     numMesasHTML = document.getElementById("numMesas").value;
@@ -58,6 +60,8 @@ function adicionarProdutos() {
 
         td.textContent = td.textContent + `${nomeProduto} \n`
         td2.textContent = td2.textContent + `R$ ${precoProduto} \n`
+        contadorProdutos = produtosLista.length;
+
         alert("Cadastrado");
     } else {
         alert("Cadastrado errado!");
@@ -99,31 +103,58 @@ function comandar() {
     let mesas = document.querySelector(".mesas");
     let produtos = document.querySelector(".produtos");
     let comandar = document.querySelector(".comandar");
+    let idProdutoNaLista = document.getElementById("produtoNaLista");
 
     numMesasHTML.style.display = "none";
     mesas.style.display = "none";
     produtos.style.display = "none";
     comandar.style.display = "block";
+
+    if (produtosLista.length === 0) {
+        alert("Nenhum produto cadastrado");
+    }
+    if (contadorComandar === 0) {
+        for (let produto = 0; produto < produtosLista.length; produto++) {
+
+            let option = document.createElement("option");
+            option.text = produtosLista[produto];
+            option.value = precoLista[produto];
+            idProdutoNaLista.add(option);
+            contadorComandar = contadorComandar + 1;
+
+        }
+
+    }
+    if (contadorProdutos > contadorComandar) {
+        for (let produto = contadorComandar; produto < contadorProdutos; produto++) {
+            let option = document.createElement("option");
+            option.text = produtosLista[produto];
+            option.value = precoLista[produto];
+            idProdutoNaLista.add(option);
+            contadorComandar = contadorComandar + 1;
+        }
+    }
+
 }
 function lancarProduto() {
     let mesaComandar = document.getElementById("mesaComandar").value;
-    let produtoNaListaHTML = document.getElementById("produtoNaLista").value;
-    let idProdutoNaLista = document.getElementById("produtoNaLista");
-    console.log(mesaComandar, produtoNaListaHTML);
+    let produtoNaLista = document.getElementById("produtoNaLista").value;
+    mesaComandar = Number(mesaComandar);
 
-    if (mesaComandar > 0 && mesaComandar <= numMesas.length) {
 
-        for (let produtos = 0; produtos < produtosLista.length; produtos++) {
+    if (mesaComandar > 0 && mesaComandar < numMesas.length) {
+        alert("Produto comandado");
+        mesaComandar = mesaComandar - 1;
+        numMesas[mesaComandar].push([produtoNaLista]);
+        document.getElementById("mesaComandar").value = "";
+    } else if (mesaComandar === numMesas.length) {
+        alert("Ultima mesa");
+        mesaComandar = mesaComandar - 1;
+        numMesas[mesaComandar].push([produtoNaLista]);
+        document.getElementById("mesaComandar").value = "";
 
-            let option = document.createElement('option');
-            option.text = "Kiwi";
-            idProdutoNaLista.add(option);
-            
-            console.log(produtosLista[produtos]);
-        }
-       console.log(produtosLista);
-        alert("Lançado!");
     } else {
-        alert("Cadastrado errado!");
+        alert("Não existe essa mesa!");
     }
+    console.log(numMesas);
 }
