@@ -49,6 +49,16 @@ table {
 .todasAsMesas h3, .comandar h3 {
     color: white;
 }
+.todasAsMesas p {
+    color: white;
+    font-size: 20px;
+    font-family: cursive;
+}
+#consultar {
+    color: crimson;
+    margin-top: -20px;
+    font-size: 28px;
+}
 .buttonMesa {
     width: 30px;
 }

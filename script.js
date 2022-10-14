@@ -97,7 +97,35 @@ function irMesas() {
         numeroMesas++;
     }
 }
+function consultarMesa() {
+    let numMesa = document.getElementById("numMesa").value;
+    let consumo = document.getElementById("consumo");
+    let gorgeta = document.getElementById("gorgeta");
+    let total = document.getElementById("total");
 
+    numMesa = Number(numMesa);
+
+   // console.log(numMesas[numMesa].length);
+    console.log(numMesa);
+  //  console.log(numMesas);
+    if (numMesa > 1 && numMesa <= numMesas.length) {
+        numMesa = numMesa - 1;
+        if (numMesas[numMesa].length === 0) {
+            alert("Mesa vazia!");
+        } else {
+            alert("TEM ALGO AI!");
+        }
+    }else if(numMesa == 1) {
+        if (numMesas[numMesa-1].length === 0) {
+            alert("Mesa vazia!");
+        } else {
+            alert("TEM ALGO AI!");
+        }
+    } else {
+        alert("Mesa invalida!");
+    }
+  
+}
 function comandar() {
     let numMesasHTML = document.querySelector(".todasAsMesas");
     let mesas = document.querySelector(".mesas");
@@ -136,6 +164,7 @@ function comandar() {
     }
 
 }
+
 function lancarProduto() {
     let mesaComandar = document.getElementById("mesaComandar").value;
     let produtoNaLista = document.getElementById("produtoNaLista").value;
@@ -146,12 +175,12 @@ function lancarProduto() {
         alert("Produto comandado");
         mesaComandar = mesaComandar - 1;
         numMesas[mesaComandar].push([produtoNaLista]);
-        document.getElementById("mesaComandar").value = "";
+
     } else if (mesaComandar === numMesas.length) {
         alert("Ultima mesa");
         mesaComandar = mesaComandar - 1;
         numMesas[mesaComandar].push([produtoNaLista]);
-        document.getElementById("mesaComandar").value = "";
+
 
     } else {
         alert("Não existe essa mesa!");
