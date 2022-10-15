@@ -118,6 +118,11 @@ function consultarMesa() {
                 let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]);
                 valorTotal = valorTotal + numeroDaVez;
             }
+            // var button = document.createElement("BUTTON");
+            // var todasAsMesas = document.querySelector(".todasAsMesas");
+            // button.appendChild(todasAsMesas);
+            // document.querySelector(body).appendChild(button);
+
             consultar.textContent = `CONTA DA MESA ${numMesa + 1}`;
             consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
             gorgetaValor = valorTotal * 0.1;
@@ -135,6 +140,7 @@ function consultarMesa() {
                 let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]);
                 valorTotal = valorTotal + numeroDaVez;
             }
+
             numMesa = numMesa + 1;
             consultar.textContent = `CONTA DA MESA ${numMesa}`;
             consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
@@ -193,17 +199,25 @@ function lancarProduto() {
     let produtoNaLista = document.getElementById("produtoNaLista").value;
     mesaComandar = Number(mesaComandar);
 
-
     if (mesaComandar > 0 && mesaComandar < numMesas.length) {
         alert("Produto comandado");
+        var nomeButton = "mesa" + mesaComandar;
+        console.log(nomeButton);
+        let buttonPintar = document.getElementById(nomeButton);
+        buttonPintar.style.background = "green";
         mesaComandar = mesaComandar - 1;
         numMesas[mesaComandar].push([produtoNaLista]);
 
     } else if (mesaComandar === numMesas.length) {
-        alert("Ultima mesa");
+        alert("Produto comandado");
         mesaComandar = mesaComandar - 1;
         numMesas[mesaComandar].push([produtoNaLista]);
-
+        mesaComandar = mesaComandar + 1;
+        let nomeBotao = "mesa" + mesaComandar;
+        console.log(nomeBotao)
+        let button = document.getElementById(nomeBotao);
+        button.style.background = "green";
+    
 
     } else {
         alert("Não existe essa mesa!");
