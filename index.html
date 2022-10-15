@@ -62,7 +62,13 @@
         <p id="gorgeta"></p>
         <p id="total"></p>
         <br>
-        <h3>Consultar mesa:  <input type="text" id="numMesa" class="buttonMesa">
+        <select>
+            <option value="com">Com Taxa de serviço</option>
+            <option value="sem">Sem Taxa de serviço</option>
+        </select>
+        <br><br>
+        <input type="button" value="Fechar mesa" class="fecharMesa" onclick="fecharMesa()">
+        <h3>Consultar mesa:  <input type="number" id="numMesa" class="buttonMesa">
             <input type="button" value="Consultar" onclick="consultarMesa()"></h3>
        
     </div>
