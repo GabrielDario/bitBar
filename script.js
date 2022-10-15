@@ -5,6 +5,7 @@ let numMesasHTML;
 let numeroMesas = 1;
 let contadorProdutos = 0;
 let contadorComandar = 0;
+let buttonPintar;
 
 function qntMesas() {
     numMesasHTML = document.getElementById("numMesas").value;
@@ -118,6 +119,7 @@ function consultarMesa() {
                 let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]);
                 valorTotal = valorTotal + numeroDaVez;
             }
+
             consultar.textContent = `CONTA DA MESA ${numMesa + 1}`;
             consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
             gorgetaValor = valorTotal * 0.1;
@@ -167,6 +169,7 @@ function comandar() {
     if (contadorComandar === 0) {
         for (let produto = 0; produto < produtosLista.length; produto++) {
 
+
             let option = document.createElement("option");
             option.text = produtosLista[produto];
             option.value = precoLista[produto];
@@ -192,15 +195,26 @@ function lancarProduto() {
     let mesaComandar = document.getElementById("mesaComandar").value;
     let produtoNaLista = document.getElementById("produtoNaLista").value;
     mesaComandar = Number(mesaComandar);
-
+  
 
     if (mesaComandar > 0 && mesaComandar < numMesas.length) {
         alert("Produto comandado");
+        let nomeButton = "mesa" + mesaComandar;
+        buttonPintar = document.getElementById(nomeButton);
+        console.log(nomeButton);
+
+        buttonPintar.style.backgroundColor = "#fa4";
         mesaComandar = mesaComandar - 1;
         numMesas[mesaComandar].push([produtoNaLista]);
 
     } else if (mesaComandar === numMesas.length) {
-        alert("Ultima mesa");
+        alert("Produto comandado");
+        let nomeButton = "mesa" + mesaComandar;
+        buttonPintar = document.getElementById(nomeButton);
+        console.log(nomeButton);
+
+        buttonPintar.style.backgroundColor = "#fa4";
+        
         mesaComandar = mesaComandar - 1;
         numMesas[mesaComandar].push([produtoNaLista]);
 
