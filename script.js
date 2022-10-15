@@ -8,219 +8,219 @@ let contadorComandar = 0;
 let buttonPintar;
 
 function qntMesas() {
-    numMesasHTML = document.getElementById("numMesas").value;
-    let mesas = document.querySelector(".mesas");
-    let todasAsMesas = document.querySelector(".todasAsMesas");
-    let produtos = document.querySelector(".produtos");
+  numMesasHTML = document.getElementById("numMesas").value;
+  let mesas = document.querySelector(".mesas");
+  let todasAsMesas = document.querySelector(".todasAsMesas");
+  let produtos = document.querySelector(".produtos");
 
-    if (numMesasHTML > 0 && numMesasHTML <= 50) {
-        mesas.style.display = "none";
-        todasAsMesas.style.display = "none";
-        produtos.style.display = "block";
-        for (let i = 1; i <= numMesasHTML; i++) {
-            numMesas.unshift([]);
-        }
-    } else {
-        alert("Entre 0 e 50 mesas!")
+  if (numMesasHTML > 0 && numMesasHTML <= 50) {
+    mesas.style.display = "none";
+    todasAsMesas.style.display = "none";
+    produtos.style.display = "block";
+    for (let i = 1; i <= numMesasHTML; i++) {
+      numMesas.unshift([]);
     }
+  } else {
+    alert("Entre 0 e 50 mesas!")
+  }
 
 }
 
 function irProdutos() {
-    let todasAsMesas = document.querySelector(".todasAsMesas");
-    let comandar = document.querySelector(".comandar");
-    let produtos = document.querySelector(".produtos");
-    comandar.style.display = "none";
-    todasAsMesas.style.display = "none";
-    produtos.style.display = "block";
+  let todasAsMesas = document.querySelector(".todasAsMesas");
+  let comandar = document.querySelector(".comandar");
+  let produtos = document.querySelector(".produtos");
+  comandar.style.display = "none";
+  todasAsMesas.style.display = "none";
+  produtos.style.display = "block";
 }
 function adicionarProdutos() {
-    let nomeProduto = document.getElementById("nomeProduto").value;
-    let precoProduto = document.getElementById("precoProduto").value;
+  let nomeProduto = document.getElementById("nomeProduto").value;
+  let precoProduto = document.getElementById("precoProduto").value;
 
 
-    var validacaoProdutos = nomeProduto !== null && nomeProduto !== undefined && nomeProduto !== ""
-        && precoProduto > 0;
+  var validacaoProdutos = nomeProduto !== null && nomeProduto !== undefined && nomeProduto !== ""
+    && precoProduto > 0;
 
-    if (validacaoProdutos) {
-        document.getElementById("nomeProduto").value = "";
-        document.getElementById("precoProduto").value = "";
-        nomeProduto = nomeProduto.toUpperCase();
+  if (validacaoProdutos) {
+    document.getElementById("nomeProduto").value = "";
+    document.getElementById("precoProduto").value = "";
+    nomeProduto = nomeProduto.toUpperCase();
 
-        produtosLista.push([nomeProduto]);
-        precoLista.push([precoProduto]);
+    produtosLista.push([nomeProduto]);
+    precoLista.push([precoProduto]);
 
-        let tr = document.createElement('tr');
-        let td = document.createElement('td');
-        let td2 = document.createElement('td');
+    let tr = document.createElement('tr');
+    let td = document.createElement('td');
+    let td2 = document.createElement('td');
 
-        tr.appendChild(td);
-        tr.appendChild(td2);
-        // Adding the entire table to the body tag
-        document.getElementById('tabela').appendChild(tr);
+    tr.appendChild(td);
+    tr.appendChild(td2);
+    // Adding the entire table to the body tag
+    document.getElementById('tabela').appendChild(tr);
 
-        td.textContent = td.textContent + `${nomeProduto} \n`
-        td2.textContent = td2.textContent + `R$ ${precoProduto} \n`
-        contadorProdutos = produtosLista.length;
+    td.textContent = td.textContent + `${nomeProduto} \n`
+    td2.textContent = td2.textContent + `R$ ${precoProduto} \n`
+    contadorProdutos = produtosLista.length;
 
-        alert("Cadastrado");
-    } else {
-        alert("Cadastrado errado!");
-    }
+    alert("Cadastrado");
+  } else {
+    alert("Cadastrado errado!");
+  }
 
 }
 
 function irMesas() {
-    let numMesasHTML = document.querySelector(".todasAsMesas");
-    let mesas = document.querySelector(".mesas");
-    let produtos = document.querySelector(".produtos");
-    let comandar = document.querySelector(".comandar");
+  let numMesasHTML = document.querySelector(".todasAsMesas");
+  let mesas = document.querySelector(".mesas");
+  let produtos = document.querySelector(".produtos");
+  let comandar = document.querySelector(".comandar");
 
-    comandar.style.display = "none";
-    mesas.style.display = "none";
-    produtos.style.display = "none";
-    numMesasHTML.style.display = "block";
+  comandar.style.display = "none";
+  mesas.style.display = "none";
+  produtos.style.display = "none";
+  numMesasHTML.style.display = "block";
 
 
-    while (numeroMesas <= numMesas.length) {
-        let btn = document.createElement("button");
+  while (numeroMesas <= numMesas.length) {
+    let btn = document.createElement("button");
 
-        btn.innerHTML = numeroMesas;
-        btn.value = numeroMesas;
-        btn.type = "submit";
-        btn.name = "button";
-        btn.id = "mesa" + numeroMesas;
-        document.querySelector('.todasAsMesas').appendChild(btn);
-        if (numeroMesas % 5 == 0) {
-            let br = document.createElement("br");
-            document.querySelector('.todasAsMesas').appendChild(br);
-        }
-        numeroMesas++;
+    btn.innerHTML = numeroMesas;
+    btn.value = numeroMesas;
+    btn.type = "submit";
+    btn.name = "button";
+    btn.id = "mesa" + numeroMesas;
+    document.querySelector('.todasAsMesas').appendChild(btn);
+    if (numeroMesas % 5 == 0) {
+      let br = document.createElement("br");
+      document.querySelector('.todasAsMesas').appendChild(br);
     }
+    numeroMesas++;
+  }
 }
 function consultarMesa() {
-    let numMesa = document.getElementById("numMesa").value;
-    let consumo = document.getElementById("consumo");
-    let gorgeta = document.getElementById("gorgeta");
-    let consultar = document.getElementById("consultar");
-    let total = document.getElementById("total");
-    let valorTotal = 0;
-    let gorgetaValor = 0;
-    numMesa = Number(numMesa);
+  let numMesa = document.getElementById("numMesa").value;
+  let consumo = document.getElementById("consumo");
+  let gorgeta = document.getElementById("gorgeta");
+  let consultar = document.getElementById("consultar");
+  let total = document.getElementById("total");
+  let valorTotal = 0;
+  let gorgetaValor = 0;
+  numMesa = Number(numMesa);
 
 
-    if (numMesa > 1 && numMesa <= numMesas.length) {
-        numMesa = numMesa - 1;
-        //console.log(numMesas[numMesa].length);
-        if (numMesas[numMesa].length === 0) {
-            alert("Mesa vazia!");
-        } else {
-            for (let percorrendoMessas = 0; percorrendoMessas < numMesas[numMesa].length; percorrendoMessas++) {
-                let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]);
-                valorTotal = valorTotal + numeroDaVez;
-            }
-
-            consultar.textContent = `CONTA DA MESA ${numMesa + 1}`;
-            consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
-            gorgetaValor = valorTotal * 0.1;
-            gorgeta.textContent = `TAXA DE SERVIÇO: R$ ${gorgetaValor.toFixed(2)}`;
-            valorTotal = valorTotal + gorgetaValor;
-            total.textContent = `TOTAL: R$ ${valorTotal.toFixed(2)}`;
-
-        }
-    } else if (numMesa == 1) {
-        if (numMesas[numMesa - 1].length === 0) {
-            alert("Mesa vazia");
-        } else {
-            numMesa = 0;
-            for (let percorrendoMessas = 0; percorrendoMessas < numMesas[numMesa].length; percorrendoMessas++) {
-                let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]);
-                valorTotal = valorTotal + numeroDaVez;
-            }
-            numMesa = numMesa + 1;
-            consultar.textContent = `CONTA DA MESA ${numMesa}`;
-            consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
-            gorgetaValor = valorTotal * 0.1;
-            gorgeta.textContent = `TAXA DE SERVIÇO: R$ ${gorgetaValor.toFixed(2)}`;
-            valorTotal = valorTotal + gorgetaValor;
-            total.textContent = `TOTAL: R$ ${valorTotal.toFixed(2)}`;
-
-        }
+  if (numMesa > 1 && numMesa <= numMesas.length) {
+    numMesa = numMesa - 1;
+    //console.log(numMesas[numMesa].length);
+    if (numMesas[numMesa].length === 0) {
+      alert("Mesa vazia!");
     } else {
-        alert("Mesa invalida!");
+      for (let percorrendoMessas = 0; percorrendoMessas < numMesas[numMesa].length; percorrendoMessas++) {
+        let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]);
+        valorTotal = valorTotal + numeroDaVez;
+      }
+
+      consultar.textContent = `CONTA DA MESA ${numMesa + 1}`;
+      consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
+      gorgetaValor = valorTotal * 0.1;
+      gorgeta.textContent = `TAXA DE SERVIÇO: R$ ${gorgetaValor.toFixed(2)}`;
+      valorTotal = valorTotal + gorgetaValor;
+      total.textContent = `TOTAL: R$ ${valorTotal.toFixed(2)}`;
+
     }
+  } else if (numMesa == 1) {
+    if (numMesas[numMesa - 1].length === 0) {
+      alert("Mesa vazia");
+    } else {
+      numMesa = 0;
+      for (let percorrendoMessas = 0; percorrendoMessas < numMesas[numMesa].length; percorrendoMessas++) {
+        let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]);
+        valorTotal = valorTotal + numeroDaVez;
+      }
+      numMesa = numMesa + 1;
+      consultar.textContent = `CONTA DA MESA ${numMesa}`;
+      consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
+      gorgetaValor = valorTotal * 0.1;
+      gorgeta.textContent = `TAXA DE SERVIÇO: R$ ${gorgetaValor.toFixed(2)}`;
+      valorTotal = valorTotal + gorgetaValor;
+      total.textContent = `TOTAL: R$ ${valorTotal.toFixed(2)}`;
+
+    }
+  } else {
+    alert("Mesa invalida!");
+  }
 
 }
 function comandar() {
-    let numMesasHTML = document.querySelector(".todasAsMesas");
-    let mesas = document.querySelector(".mesas");
-    let produtos = document.querySelector(".produtos");
-    let comandar = document.querySelector(".comandar");
-    let idProdutoNaLista = document.getElementById("produtoNaLista");
+  let numMesasHTML = document.querySelector(".todasAsMesas");
+  let mesas = document.querySelector(".mesas");
+  let produtos = document.querySelector(".produtos");
+  let comandar = document.querySelector(".comandar");
+  let idProdutoNaLista = document.getElementById("produtoNaLista");
 
-    numMesasHTML.style.display = "none";
-    mesas.style.display = "none";
-    produtos.style.display = "none";
-    comandar.style.display = "block";
+  numMesasHTML.style.display = "none";
+  mesas.style.display = "none";
+  produtos.style.display = "none";
+  comandar.style.display = "block";
 
-    if (produtosLista.length === 0) {
-        alert("Nenhum produto cadastrado");
-    }
-    if (contadorComandar === 0) {
-        for (let produto = 0; produto < produtosLista.length; produto++) {
+  if (produtosLista.length === 0) {
+    alert("Nenhum produto cadastrado");
+  }
+  if (contadorComandar === 0) {
+    for (let produto = 0; produto < produtosLista.length; produto++) {
 
 
-            let option = document.createElement("option");
-            option.text = produtosLista[produto];
-            option.value = precoLista[produto];
-            idProdutoNaLista.add(option);
-            contadorComandar = contadorComandar + 1;
-
-        }
+      let option = document.createElement("option");
+      option.text = produtosLista[produto];
+      option.value = precoLista[produto];
+      idProdutoNaLista.add(option);
+      contadorComandar = contadorComandar + 1;
 
     }
-    if (contadorProdutos > contadorComandar) {
-        for (let produto = contadorComandar; produto < contadorProdutos; produto++) {
-            let option = document.createElement("option");
-            option.text = produtosLista[produto];
-            option.value = precoLista[produto];
-            idProdutoNaLista.add(option);
-            contadorComandar = contadorComandar + 1;
-        }
+
+  }
+  if (contadorProdutos > contadorComandar) {
+    for (let produto = contadorComandar; produto < contadorProdutos; produto++) {
+      let option = document.createElement("option");
+      option.text = produtosLista[produto];
+      option.value = precoLista[produto];
+      idProdutoNaLista.add(option);
+      contadorComandar = contadorComandar + 1;
     }
+  }
 
 }
 
 function lancarProduto() {
-    let mesaComandar = document.getElementById("mesaComandar").value;
-    let produtoNaLista = document.getElementById("produtoNaLista").value;
-    mesaComandar = Number(mesaComandar);
-  
-
-    if (mesaComandar > 0 && mesaComandar < numMesas.length) {
-        alert("Produto comandado");
-        let nomeButton = "mesa" + mesaComandar;
-        buttonPintar = document.getElementById(nomeButton);
-        console.log(nomeButton);
-
-        buttonPintar.style.backgroundColor = "#fa4";
-        mesaComandar = mesaComandar - 1;
-        numMesas[mesaComandar].push([produtoNaLista]);
-
-    } else if (mesaComandar === numMesas.length) {
-        alert("Produto comandado");
-        let nomeButton = "mesa" + mesaComandar;
-        buttonPintar = document.getElementById(nomeButton);
-        console.log(nomeButton);
-
-        buttonPintar.style.backgroundColor = "#fa4";
-        
-        mesaComandar = mesaComandar - 1;
-        numMesas[mesaComandar].push([produtoNaLista]);
+  let mesaComandar = document.getElementById("mesaComandar").value;
+  let produtoNaLista = document.getElementById("produtoNaLista").value;
+  mesaComandar = Number(mesaComandar);
 
 
-    } else {
-        alert("Não existe essa mesa!");
-    }
-    console.log(numMesas);
+  if (mesaComandar > 0 && mesaComandar < numMesas.length) {
+    alert("Produto comandado");
+    let nomeButton = "mesa" + mesaComandar;
+    buttonPintar = document.getElementById(nomeButton);
+    console.log(nomeButton);
+
+    buttonPintar.style.backgroundColor = "#fa4";
+    mesaComandar = mesaComandar - 1;
+    numMesas[mesaComandar].push([produtoNaLista]);
+
+  } else if (mesaComandar === numMesas.length) {
+    alert("Produto comandado");
+    let nomeButton = "mesa" + mesaComandar;
+    buttonPintar = document.getElementById(nomeButton);
+    console.log(nomeButton);
+
+    buttonPintar.style.backgroundColor = "#fa4";
+
+    mesaComandar = mesaComandar - 1;
+    numMesas[mesaComandar].push([produtoNaLista]);
+
+
+  } else {
+    alert("Não existe essa mesa!");
+  }
+  console.log(numMesas);
 }
