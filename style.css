@@ -3,8 +3,8 @@ body {
     background-image: url(background.jpg);
 }
 h1 {
-    color: darkblue;
-    font-family: cursive;
+    color: antiquewhite;
+    font-family: ui-rounded;
 }
 h2 {
     color: cornflowerblue;
@@ -30,16 +30,16 @@ table {
     font-size: 20px;
 }
 
-.produtos ,.todasAsMesas, .comandar{
+.produtos ,.todasAsMesas, .comandar, .extrato{
     display: none;
 }
-.produtos li, .todasAsMesas li , .comandar li{
+li{
     display: inline-block;
     margin-left: 16px;
     cursor: pointer;
 }
 
-.produtos li:hover,.todasAsMesas li:hover , .comandar li:hover{
+li:hover{
     background-color: dimgray;
     opacity: 0.6;
 }
@@ -68,4 +68,8 @@ table {
 }
 .buttonMesa {
     width: 30px;
+}
+.extrato h3 {
+    color: burlywood;
+    font-size: 30px;
 }

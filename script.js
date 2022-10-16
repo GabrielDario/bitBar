@@ -36,8 +36,11 @@ function irProdutos() {
     let todasAsMesas = document.querySelector(".todasAsMesas"); //Somente manipulando css e html
     let comandar = document.querySelector(".comandar");//no javascript (mostrar uma classe e tiras as outras)
     let produtos = document.querySelector(".produtos");
+    let extrato = document.querySelector(".extrato");
+
     comandar.style.display = "none";
     todasAsMesas.style.display = "none";
+    extrato.style.display = "none";
     produtos.style.display = "block";
 }
 
@@ -86,7 +89,9 @@ function irMesas() {
     let mesas = document.querySelector(".mesas");
     let produtos = document.querySelector(".produtos");
     let comandar = document.querySelector(".comandar");
+    let extrato = document.querySelector(".extrato");
 
+    extrato.style.display = "none";
     comandar.style.display = "none";
     mesas.style.display = "none";
     produtos.style.display = "none";
@@ -113,24 +118,68 @@ function irMesas() {
 function fecharMesa() {
     let numMesa = document.getElementById("numMesa").value; //pegar valor num mesa no html
     numMesa = Number(numMesa);
-    numMesa = numMesa - 1; // converter número e tirar 1 porque a lista começa com 0
-    console.log(numMesa);
-    console.log(numMesas);
-    console.log(numMesas[numMesa].length);
+   
     if (numMesa > 1 && numMesa <= numMesas.length) { //Verificar se a mesa é válida (entre 1 e o máximo)
-        alert("Válido");    //Se for válido...
-        for (let produtos = 0; produtos < numMesas[numMesa].length; produtos++) { //percorer lista de mesas
-            // dentro da mesa
-            console.log(numMesas[numMesa][produtos]);
-            let addValorExtrato = Number(numMesas[numMesa][produtos]); //variável local para armazenar uma por uma
-            extratoGeral = extratoGeral + addValorExtrato; // adicionando  na variavel global
+        //Se for válido...
+        numMesa = numMesa - 1; // converter número e tirar 1 porque a lista começa com 0
+        for (let produtos = 0; produtos < numMesas[numMesa].length; produtos++) { //percorer lista de mesas dentro da mesa
+            let addValorExtrato = Number(numMesas[numMesa][produtos]);//variável local para armazenar uma por uma
+            let taxa = document.getElementById("taxa").value;
+            if(taxa === "com") { // se tiver taxa de serviço
+                   let gorgetaValor = addValorExtrato * 0.1; // faz valor vezes 0,1
+                   addValorExtrato = addValorExtrato + gorgetaValor; // soma o valor total com valor multiplicado por 0,1
+                   extratoGeral = extratoGeral + addValorExtrato;  // adicionando  na variavel global
+            } else {
+                extratoGeral = extratoGeral + addValorExtrato;   // adicionando  na variavel global
+            }
+       
         }
+       
+        for (let produtos = 0; produtos <= numMesas[numMesa].length; produtos++) {//For para removar todos os produtos da mesa e fechar conta
+         
+            numMesas[numMesa].shift();
+            alert("Mesa paga!");
+            document.getElementById("consumo").textContent = "Mesa vazia";
+            document.getElementById("gorgeta").textContent = "";
+            document.getElementById("total").textContent = "";
+
+            let nomeButton = "mesa" + (numMesa+1); //Criar botao com nome mesaX
+            buttonPintar = document.getElementById(nomeButton); //aonde X é o numero da mesa
+
+            buttonPintar.style.backgroundColor = "aliceblue"; //pintar o button da mesa em si
+        }
+
     } else if (numMesa == 1) {
-        alert("Válido 1")
+        for (let produtos = 0; produtos < numMesas[numMesa].length; produtos++) { //percorer lista de mesas dentro da mesa
+            let addValorExtrato = Number(numMesas[numMesa][produtos]);//variável local para armazenar uma por uma
+            let taxa = document.getElementById("taxa").value;
+            if(taxa === "com") { // se tiver taxa de serviço
+                   let gorgetaValor = addValorExtrato * 0.1; // faz valor vezes 0,1
+                   addValorExtrato = addValorExtrato + gorgetaValor; // soma o valor total com valor multiplicado por 0,1
+                   extratoGeral = extratoGeral + addValorExtrato;  // adicionando  na variavel global
+            } else {
+                extratoGeral = extratoGeral + addValorExtrato;   // adicionando  na variavel global
+            }
+    
+        }
+       
+        for (let produtos = 0; produtos <= numMesas[numMesa].length; produtos++) {//For para removar todos os produtos da mesa e fechar conta
+         
+            numMesas[numMesa].shift();
+            alert("Mesa paga!");
+            document.getElementById("consumo").textContent = "Mesa vazia";
+            document.getElementById("gorgeta").textContent = "";
+            document.getElementById("total").textContent = "";
+
+            let nomeButton = "mesa" + (numMesa+1); //Criar botao com nome mesaX
+            buttonPintar = document.getElementById(nomeButton); //aonde X é o numero da mesa
+
+            buttonPintar.style.backgroundColor = "aliceblue"; //pintar o button da mesa em si
+        }
+
     } else {
         alert("Mesa invalida!");
     }
-    console.log(extratoGeral);
 }
 
 //Ver consumo da mesa
@@ -149,28 +198,37 @@ function consultarMesa() {
 
         if (numMesas[numMesa].length === 0) {
             alert("Mesa vazia!"); //Nenhum produto comandado na mesa
+            document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa+1}`;
+            document.getElementById("consumo").textContent = "Mesa vazia";
+            document.getElementById("gorgeta").textContent = "";
+            document.getElementById("total").textContent = "";
+        
         } else {
             //percorer todas as listar dentro da lista da mesa
             for (let percorrendoMessas = 0; percorrendoMessas < numMesas[numMesa].length; percorrendoMessas++) {
                 let numeroDaVez = Number(numMesas[numMesa][percorrendoMessas]); //converter em  number
                 valorTotal = valorTotal + numeroDaVez; // adicionando preço da conta
             }
-        
+
             consultar.textContent = `CONTA DA MESA ${numMesa + 1}`;
-              //Adicionando valor total
+            //Adicionando valor total
             consumo.textContent = `CONSUMO: R$ ${valorTotal}`;
-              //Adicionando valor do 10%
+            //Adicionando valor do 10%
             gorgetaValor = valorTotal * 0.1;
             gorgeta.textContent = `TAXA DE SERVIÇO: R$ ${gorgetaValor.toFixed(2)}`;
             valorTotal = valorTotal + gorgetaValor;
             //Adicionando valor do Total com 10%
             total.textContent = `TOTAL: R$ ${valorTotal.toFixed(2)}`;
-            
+
             //Mesma coisa se repete se mesa for 1
         }
     } else if (numMesa == 1) {
         if (numMesas[numMesa - 1].length === 0) {
             alert("Mesa vazia");
+            document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa+1}`;
+            document.getElementById("consumo").textContent = "Mesa vazia";
+            document.getElementById("gorgeta").textContent = "";
+            document.getElementById("total").textContent = "";
         } else {
             numMesa = 0;
             for (let percorrendoMessas = 0; percorrendoMessas < numMesas[numMesa].length; percorrendoMessas++) {
@@ -198,10 +256,12 @@ function comandar() {
     let mesas = document.querySelector(".mesas");
     let produtos = document.querySelector(".produtos");
     let comandar = document.querySelector(".comandar");
+    let extrato = document.querySelector(".extrato");
     let idProdutoNaLista = document.getElementById("produtoNaLista");
 
     numMesasHTML.style.display = "none";
     mesas.style.display = "none";
+    extrato.style.display = "none";
     produtos.style.display = "none";
     comandar.style.display = "block";
 
@@ -246,22 +306,39 @@ function lancarProduto() {
 
         buttonPintar.style.backgroundColor = "#fa4"; //pintar o button da mesa em si
         mesaComandar = mesaComandar - 1; //CORRIGIR
-        numMesas[mesaComandar].push([produtoNaLista]); //Adicionamento produtos na mesa em si
+        numMesas[mesaComandar].push(produtoNaLista); //Adicionamento produtos na mesa em si
 
     } else if (mesaComandar === numMesas.length) { //Para adicionar produto novo
         alert("Produto comandado");
         let nomeButton = "mesa" + mesaComandar;
         buttonPintar = document.getElementById(nomeButton);
-        console.log(nomeButton);
-
+    
         buttonPintar.style.backgroundColor = "#fa4";
 
         mesaComandar = mesaComandar - 1;
-        numMesas[mesaComandar].push([produtoNaLista]); //adicionar produto novo
+        numMesas[mesaComandar].push(produtoNaLista); //adicionar produto novo
 
 
     } else {
         alert("Não existe essa mesa!");
     }
 
+}
+
+function extrato() {
+    let numMesasHTML = document.querySelector(".todasAsMesas");
+    let mesas = document.querySelector(".mesas");
+    let produtos = document.querySelector(".produtos");
+    let comandar = document.querySelector(".comandar");
+    let extrato = document.querySelector(".extrato");
+    let valorTotal = document.getElementById("valorArrecadado");
+
+    comandar.style.display = "none";
+    mesas.style.display = "none";
+    produtos.style.display = "none";
+    numMesasHTML.style.display = "none";
+    extrato.style.display = "block";
+
+    //Inserir a variável valor total no htmk
+    valorTotal.textContent = `Valor bruto gerado = R$ ${extratoGeral} Reais`
 }
