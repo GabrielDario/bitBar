@@ -12,8 +12,8 @@ let audioConfirmLancar = new Audio('confirmLancar.wav');
 let audioError = new Audio('error.wav');
 let cadProduto = new Audio('cadProduto.wav');
 let fecharMesaSOM = new Audio('fecharMesa.wav');
-let com10 = new Audio('com10.wav');
-let sem10 = new Audio('sem10.wav');
+let com10 = new Audio('com10.mp3');
+let sem10 = new Audio('sem10.mp3');
 
 //Função para saber quantas mesas serão adicionadas
 function qntMesas() {
