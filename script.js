@@ -215,8 +215,8 @@ function consultarMesa() {
         }
     } else if (numMesa == 1) {
         if (numMesas[numMesa - 1].length === 0) {
-            alert("Mesa vazia");
-            document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa + 1}`;
+            alert("Mesa vazia 1");
+            document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa}`;
             document.getElementById("consumo").textContent = "Mesa vazia";
             document.getElementById("gorgeta").textContent = "";
             document.getElementById("total").textContent = "";
