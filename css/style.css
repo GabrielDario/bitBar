@@ -1,14 +1,33 @@
 body {
     text-align: center;
-    background-image: url(background.jpg);
+    background-image: url("../img/background.jpg");
+
+    background-size: 1500px;
 }
+@font-face {
+    font-family: Ethnocentric;
+    src: url('../fonte/ethnocentricRg.otf');
+    src: url('../fonte/ethnocentricRgIt.otf');
+}
+  @font-face {
+    font-family: ACME Font;
+    src: url('../fonte/Silkscreen-Bold.ttf');
+    src: url('../fonte/Silkscreen-Regular.ttf');
+  }
 h1 {
-    color: antiquewhite;
-    font-family: ui-rounded;
+    color: blueviolet;
+    font-size: 43px;
+    font-family: ACME Font;
 }
-h2 {
-    color: cornflowerblue;
+.pc {
+    font-size: 31px;
+    color: beige;
 }
+.lista h2 {
+    color: cornsilk;
+    font-family: Ethnocentric;
+}
+
 p {
     color: white;
 }

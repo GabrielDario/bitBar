@@ -7,14 +7,15 @@ let contadorProdutos = 0; //Variavel contadora para toda vez que abrir 'comandar
 let contadorComandar = 0; //Comparar com a contadorProdutos 
 let buttonPintar; // Para pintar as mesas que tem algo cadastrado
 let extratoGeral = 0; //Receita do restaurante
-let audioDinheiro = new Audio('dinheiro.mp3');
-let audioConfirmLancar = new Audio('confirmLancar.wav');
-let audioError = new Audio('error.wav');
-let cadProduto = new Audio('cadProduto.wav');
-let fecharMesaSOM = new Audio('fecharMesa.wav');
-let com10 = new Audio('com10.mp3');
-let sem10 = new Audio('sem10.mp3');
-
+let audioDinheiro = new Audio('sons/dinheiro.mp3');
+let audioConfirmLancar = new Audio('sons/audioConfirmLancar.mp3');
+let audioError = new Audio('sons/error.wav');
+let fecharMesaSOM = new Audio('sons/fecharMesa.wav');
+let com10 = new Audio('sons/com10.mp3');
+let sem10 = new Audio('sons/sem10.mp3');
+let addProduto = new Audio('sons/addProduto.mp3');
+let mudarAba = new Audio('sons/jump.mp3');
+let vazia = new Audio('sons/vazia.mp3');
 //Função para saber quantas mesas serão adicionadas
 function qntMesas() {
     //elementos HTML que quero manipular (mostrar,não mostrar...)
@@ -34,13 +35,14 @@ function qntMesas() {
         }
         //enquanto o numeroMesas(começa com 1) não for igual a números de mesas total,faça
         while (numeroMesas <= numMesas.length) {
-            let btn = document.createElement("button"); //cria um botão
+            btn = document.createElement("button"); //cria um botão
 
             btn.innerHTML = numeroMesas; //numero da mesa
             btn.value = numeroMesas;
             btn.type = "submit";
             btn.name = "button";
             btn.id = "mesa" + numeroMesas; //dar id no button (USAR MAIS PARA FRENTE)
+            // btn.addEventListener("click", verificarButton);
             document.querySelector('.todasAsMesas').appendChild(btn); //Definindo classe pai e filha
             if (numeroMesas % 5 == 0) { //quando der 5 mesas,ele vai quebrar linha com <br>
                 let br = document.createElement("br");
@@ -57,6 +59,7 @@ function qntMesas() {
 
 //Para adicionar produtos do restaurante(HTML)
 function irProdutos() {
+    mudarAba.play();
     let todasAsMesas = document.querySelector(".todasAsMesas"); //Somente manipulando css e html
     let comandar = document.querySelector(".comandar");//no javascript (mostrar uma classe e tiras as outras)
     let produtos = document.querySelector(".produtos");
@@ -99,7 +102,7 @@ function adicionarProdutos() {
         td.textContent = td.textContent + `${nomeProduto} ` //adicionando e adicionando sempre o anterior
         td2.textContent = td2.textContent + `R$ ${precoProduto} ` // para não apagar
         contadorProdutos = produtosLista.length;
-        cadProduto.play();
+        addProduto.play();
         alert("Cadastrado");
     } else {
         audioError.play();
@@ -111,6 +114,7 @@ function adicionarProdutos() {
 
 //Apenas mostrar no html e adicionar botão para mesa
 function irMesas() {
+    mudarAba.play();
     let numMesasHTML = document.querySelector(".todasAsMesas");
     let mesas = document.querySelector(".mesas");
     let produtos = document.querySelector(".produtos");
@@ -132,6 +136,7 @@ function fecharMesa() {
     console.log(numMesas[numMesa-1]);
     console.log(numMesas[numMesa-1].length);
     if (numMesas[numMesa-1].length === 0) {
+        vazia.play();
         alert("Mesa Vazia!");
       return;
     }
@@ -168,6 +173,7 @@ function fecharMesa() {
 
         buttonPintar.style.backgroundColor = "aliceblue"; //pintar o button da mesa em si
     } else {
+        vazia.play();
         alert("Mesa invalida!");
     }
  
@@ -184,10 +190,12 @@ function consultarMesa() {
     let gorgetaValor = 0;
     numMesa = Number(numMesa); //Converter o valor input em number
 
+   
     if (numMesa > 1 && numMesa <= numMesas.length) { //Se ela for entre 2 e ultima mesa
         numMesa = numMesa - 1;  // tirar -1 para comparar com a lista que começa com 0
 
         if (numMesas[numMesa].length === 0) {
+            vazia.play();
             alert("Mesa vazia!"); //Nenhum produto comandado na mesa
             document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa + 1}`;
             document.getElementById("consumo").textContent = "Mesa vazia";
@@ -215,6 +223,7 @@ function consultarMesa() {
         }
     } else if (numMesa == 1) {
         if (numMesas[numMesa - 1].length === 0) {
+            vazia.play();
             alert("Mesa vazia 1");
             document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa}`;
             document.getElementById("consumo").textContent = "Mesa vazia";
@@ -236,10 +245,12 @@ function consultarMesa() {
 
         }
     } else {
+        audioError.play();
         alert("Mesa invalida!");
     }
 
 }
+
 
 //Abrir HTML E MONTAR OPTION CONFORME OS PRODUTOS
 function comandar() {
@@ -249,6 +260,7 @@ function comandar() {
        
     }
     if (contadorProdutos !== 0) {
+        mudarAba.play();
         let numMesasHTML = document.querySelector(".todasAsMesas");
         let mesas = document.querySelector(".mesas");
         let produtos = document.querySelector(".produtos");
@@ -277,7 +289,6 @@ function comandar() {
     }
     //Verificar se ele cadastrou algo
     if (contadorProdutos > contadorComandar) {
-        console.log("foi 2");
         let numMesasHTML = document.querySelector(".todasAsMesas");
         let mesas = document.querySelector(".mesas");
         let produtos = document.querySelector(".produtos");
@@ -328,7 +339,9 @@ function lancarProduto() {
         
         audioConfirmLancar.play();
     } else {
+        audioError.play();
         alert("Não existe essa mesa!");
+    
     }
 
 }
