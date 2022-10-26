@@ -5,29 +5,30 @@ body {
     background-size: 1500px;
 }
 @font-face {
-    font-family: Ethnocentric;
-    src: url('../fonte/ethnocentricRg.otf');
-    src: url('../fonte/ethnocentricRgIt.otf');
+    font-family: CinzelDecorative-Regular;
+    src: url('../fonte/CinzelDecorative-Regular.otf');
 }
   @font-face {
-    font-family: ACME Font;
-    src: url('../fonte/Silkscreen-Bold.ttf');
-    src: url('../fonte/Silkscreen-Regular.ttf');
+    font-family: Silkscreen-Regular;
+    src: url('../fonte/CinzelDecorative-Regular.otf');
+    src: url('../fonte/CinzelDecorative-Regular.otf');
   }
 h1 {
-    color: blueviolet;
-    font-size: 43px;
-    font-family: ACME Font;
+    color: rgb(255, 123, 0);
+    font-size: 70px;
+    font-family: CinzelDecorative-Regular;
 }
 .pc {
-    font-size: 31px;
+    font-size: 30px;
     color: beige;
 }
 .lista h2 {
     color: cornsilk;
-    font-family: Ethnocentric;
+    font-family: CinzelDecorative-Regular;
 }
-
+.mesas p {
+    font-family: CinzelDecorative-Regular;
+}
 p {
     color: white;
 }
@@ -42,7 +43,7 @@ table {
     display: inline-grid;
 }
 .mesas p {
-    font-size: 40px;
+    font-size: 30px;
 }
 .produtos p {
     display: contents;
