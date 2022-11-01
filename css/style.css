@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    background-image: url("../img/fundo.jpg");
+    background-image: url("../img/background.webp");
 
     background-size: 1319px;
 }
@@ -52,7 +52,7 @@ table {
     font-size: 20px;
 }
 
-.produtos ,.todasAsMesas, .comandar, .extrato{
+.produtos ,.todasAsMesas, .comandar, .extrato, .informacoes{
     display: none;
 }
 li{
@@ -98,4 +98,40 @@ li:hover{
 .extrato h3 {
     color: burlywood;
     font-size: 30px;
+}
+#valorArrecadado {
+    font-family: 'Silkscreen-Regular';
+    font-size: 40px;
+    color: mediumblue;
+}
+.informacoes h3 {
+    font-family: cursive;
+    font-size: 40px;
+    color: ghostwhite;
+}
+.tm {
+    background: darkkhaki;
+
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.taxa {
+    background: darkkhaki;
+
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.mesasFechadas {
+    background: darkkhaki;
+
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.informacoes h4 {
+    color: darkblue;
+    font-family: 'CinzelDecorative-Regular';
+    font-size: 20px;
+}
+.informacoes h5 {
+    font-size: 20px;
 }

@@ -11,15 +11,18 @@
 </head>
 
 <body id="body">
+    <!-- Aba inicial para ver quantas mesas e nome do restaurante -->
     <h1>Monte seu restaurante</h1>
     <div class="mesas">
         <p>Quantas mesas seu restaurante tem? 1 a 50 </p><input type="number" id="numMesas">
         <input type="button" value="Enviar" onclick="qntMesas();">
     </div>
+
+    <!-- aba do produtos -->
     <div class="produtos">
         <ul class="lista">
             <li style="background-color: dimgray;opacity: 0.6;">
-                <h2 >ADICIONAR PRODUTOS</a></h2>
+                <h2>ADICIONAR PRODUTOS</a></h2>
             </li>
             <li>
                 <h2 onclick="irMesas();">Mesas</h2>
@@ -28,8 +31,12 @@
                 <h2 onclick="comandar();">Comandar</h2>
             </li>
             <li>
+                <h2 onclick="infGeral()">Informações gerais</h2>
+            </li>
+            <li>
                 <h2 onclick="extrato();">Controle financeiro</h2>
             </li>
+
         </ul>
         <p>Nome do produto para cadastrar?</p> <input type="text" id="nomeProduto"><br><br>
         <p>Valor do produto?</p> <input type="number" id="precoProduto"><br><br>
@@ -45,17 +52,21 @@
         </table>
 
     </div>
+    <!-- Aba das mesas -->
     <div class="todasAsMesas">
-    
-        <ul  class="lista">
+
+        <ul class="lista">
             <li>
                 <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li style="background-color: dimgray;opacity: 0.6;">
-                <h2 >Mesas</h2>
+                <h2>Mesas</h2>
             </li>
             <li>
                 <h2 onclick="comandar();">Comandar</h2>
+            </li>
+            <li>
+                <h2 onclick="infGeral()">Informações gerais</h2>
             </li>
             <li>
                 <h2 onclick="extrato();">Controle financeiro</h2>
@@ -73,53 +84,102 @@
         <h3 class="pagamento">Metodo de pagamento</h3>
         <select id="pagamento">
             <option value="1">Dinheiro</option>
-            <option value="2">Cartão Credito - Visa</option>
-            <option value="3">Cartão Credito - MasterCard</option>
-            <option value="4">Cartão Débito - Visa</option>
-            <option value="5">Cartão Débito - MasterCard</option>
-            <option value="6">Pix</option>
-            <option value="7">Cheque</option>
+            <option value="2">Cartão Credito</option>
+            <option value="3">Cartão Débito</option>
+            <option value="4">Pix</option>
+            <option value="5">Cheque</option>
         </select>
         <br><br>
         <input type="button" value="Fechar mesa" class="fecharMesa" onclick="fecharMesa()">
-        <h3>Consultar mesa:  <input type="number" id="numMesa" class="buttonMesa">
-            <input type="button" value="Consultar" onclick="consultarMesa()"></h3>
-       
+        <h3>Consultar mesa: <input type="number" id="numMesa" class="buttonMesa">
+            <input type="button" value="Consultar" onclick="consultarMesa()">
+        </h3>
+
     </div>
+    <!-- Aba para comandar -->
     <div class="comandar">
-        <ul  class="lista">
+        <ul class="lista">
             <li>
                 <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="irMesas();">Mesas</h2>
             </li>
-            <li  style="background-color: dimgray;opacity: 0.6;">
+            <li style="background-color: dimgray;opacity: 0.6;">
                 <h2>Comandar</h2>
+            </li>
+            <li>
+                <h2 onclick="infGeral()">Informações gerais</h2>
             </li>
             <li>
                 <h2 onclick="extrato();">Controle financeiro</h2>
             </li>
         </ul>
-        <h3>Comandar mesa:  <input type="text" id="mesaComandar" class="buttonMesa"> </h3>
-            <select id="produtoNaLista">
-               
-              </select>
-              <br><br>
-              <input type="button" value="Lançar" onclick="lancarProduto();">
+        <h3>Comandar mesa: <input type="text" id="mesaComandar" class="buttonMesa"> </h3>
+        <select id="produtoNaLista">
+
+        </select>
+        <br><br>
+        <input type="button" value="Lançar" onclick="lancarProduto();">
     </div>
-    <div class="extrato">
-        <ul  class="lista">
+    <!-- Aba de informações Gerais -->
+    <div class="informacoes">
+        <ul class="lista">
             <li>
                 <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="irMesas();">Mesas</h2>
             </li>
-            <li >
+            <li>
                 <h2 onclick="comandar()">Comandar</h2>
             </li>
-            <li  style="background-color: dimgray;opacity: 0.6;">
+            <li style="background-color: dimgray;opacity: 0.6;">
+                <h2 onclick="infGeral()">Informações gerais</h2>
+            </li>
+            <li>
+                <h2 onclick="extrato();">Controle financeiro</h2>
+            </li>
+
+        </ul>
+        <h3>Informações Gerais</h3>
+        <div class="tm">
+            <h4>Ticket Médio (Preco médio gasto por pessoa)
+
+                <h5 id="ticketMedio"> <br>R$ 0<br></h5>
+            </h4>
+        </div>
+
+        <div class="taxa">
+            <h4>Controle de taxa de serviço</h4>
+            <h5 id="qntCom10"></h5>
+            <h5 id="qntSem10"></h5>
+            <h5 id="porcCom10"></h5>
+            <h5 id="porcSem10"></h5>
+        </div>
+        <div class="mesasFechadas">
+            <h4>Mesas Fechadas: </h4>
+            <h5 id="mesasFechadas">0</h5>
+        </div>
+
+    </div>
+
+    <!-- Aba de controle financeiro -->
+    <div class="extrato">
+        <ul class="lista">
+            <li>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
+            </li>
+            <li>
+                <h2 onclick="irMesas();">Mesas</h2>
+            </li>
+            <li>
+                <h2 onclick="comandar()">Comandar</h2>
+            </li>
+            <li>
+                <h2 onclick="infGeral()">Informações gerais</h2>
+            </li>
+            <li style="background-color: dimgray;opacity: 0.6;">
                 <h2 onclick="extrato();">Controle financeiro</h2>
             </li>
         </ul>
@@ -127,30 +187,37 @@
         <h3>Método de pagamento</h3>
         <table>
             <tr>
-                <td ><b>Método de pagamento</b></td>
-                <td ><b>Quantidade que pagaram</b></td>
+                <td><b>Método de pagamento</b></td>
+                <td><b>Quantidade cada método</b></td>
+                <td><b>Valor total em cada método</b></td>
             </tr>
             <tr>
-                <td ><b>Dinheiro</b></td>
-                <b></b><td id="dinheiroQnt">0</td><br>
+                <td>Dinheiro</td>
+                <td id="dinheiroQnt">0</td>
+                <td id="valorDinheiro">0</td>
             </tr>
             <tr>
-                <td ><b>Cartão Credito Visa</b></td>
-                <td id="credVisa"><b>0</b></td>
+                <td>Cartão Credito</td>
+                <td id="qntCredito"><b>0</b></td>
+                <td id="valorCredito">0</td>
             </tr>
             <tr>
-                <td ><b>Cartão Credito MasterCard</b></td>
-                <td id="credMast"><b>0</b></td>
+                <td>Cartão Débito</td>
+                <td id="qntDebito"><b>0</b></td>
+                <td id="valorDebito">0</td>
             </tr>
             <tr>
-                <td ><b>Cartão Débito Visa</b></td>
-                <td id="debVisa"><b>0</b></td>
+                <td>PIX</td>
+                <td id="pix"><b>0</b></td>
+                <td id="valorPix">0</td>
             </tr>
             <tr>
-                <td ><b>Cartão Débito MasterCard</b></td>
-                <td id="devMaster"><b>0</b></td>
+                <td>Cheque</td>
+                <td id="cheque">0</td>
+                <td id="valorCheque">0</td>
             </tr>
     </div>
+
 </body>
 
 </html>
