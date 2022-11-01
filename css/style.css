@@ -1,8 +1,8 @@
 body {
     text-align: center;
-    background-image: url("../img/background.webp");
+    background-image: url("../img/fundo.jpg");
 
-    background-size: 1500px;
+    background-size: 1319px;
 }
 @font-face {
     font-family: CinzelDecorative-Regular;
@@ -43,7 +43,9 @@ table {
     display: inline-grid;
 }
 .mesas p {
-    font-size: 30px;
+    font-size: 35px;
+    color: rgb(190, 16, 16);
+    font-weight: bold;
 }
 .produtos p {
     display: contents;
