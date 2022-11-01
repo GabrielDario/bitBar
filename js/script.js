@@ -6,7 +6,19 @@ let numeroMesas = 1; //variavel para fazer os botões da mesa
 let contadorProdutos = 0; //Variavel contadora para toda vez que abrir 'comandar'verificar se foi adicionado mais coisa
 let contadorComandar = 0; //Comparar com a contadorProdutos 
 let buttonPintar; // Para pintar as mesas que tem algo cadastrado
+
+//Variável do financeiro
 let extratoGeral = 0; //Receita do restaurante
+
+let contDinheiro = 0;
+let contCredVisa = 0;
+let contCredMast = 0;
+let contDebVisa = 0;
+let contDebMast = 0
+let contPix = 0;
+let contCheque = 0;
+
+//Audio
 let audioDinheiro = new Audio('sons/dinheiro.mp3');
 let audioConfirmLancar = new Audio('sons/audioConfirmLancar.mp3');
 let audioError = new Audio('sons/error.wav');
@@ -107,7 +119,7 @@ function adicionarProdutos() {
     } else {
         audioError.play();
         alert("Cadastrado errado!");
-    
+
     }
 
 }
@@ -132,13 +144,11 @@ function irMesas() {
 function fecharMesa() {
     let numMesa = document.getElementById("numMesa").value; //pegar valor num mesa no html
     numMesa = Number(numMesa);
-    console.log(numMesas);
-    console.log(numMesas[numMesa-1]);
-    console.log(numMesas[numMesa-1].length);
-    if (numMesas[numMesa-1].length === 0) {
+
+    if (numMesas[numMesa - 1].length === 0) {
         vazia.play();
         alert("Mesa Vazia!");
-      return;
+        return;
     }
 
     if (numMesa >= 1 && numMesa <= numMesas.length) { //Verificar se a mesa é válida (entre 1 e o máximo)
@@ -148,23 +158,26 @@ function fecharMesa() {
         for (let produtos = 0; produtos < numMesas[numMesa].length; produtos++) { //percorer lista de mesas dentro da mesa
             let addValorExtrato = Number(numMesas[numMesa][produtos]);//variável local para armazenar uma por uma
             let taxa = document.getElementById("taxa").value;
+
             if (taxa === "com") { // se tiver taxa de serviço
                 com10.play();
                 let gorgetaValor = addValorExtrato * 0.1; // faz valor vezes 0,1
                 addValorExtrato = addValorExtrato + gorgetaValor; // soma o valor total com valor multiplicado por 0,1
                 extratoGeral = extratoGeral + addValorExtrato;  // adicionando  na variavel global
-                
+
             } else {
                 sem10.play();
                 extratoGeral = extratoGeral + addValorExtrato;   // adicionando  na variavel global
             }
-
+            verificarPagamento();
         }
+        consultarMesa();
         alert("Mesa paga !");
+
         for (let produtos = 0; produtos <= numMesas[numMesa].length; produtos++) {//For para removar todos os produtos da mesa e fechar conta
             numMesas[numMesa].shift();
         }
-        document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa+1}`;
+        document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa + 1}`;
         document.getElementById("consumo").textContent = "Mesa vazia";
         document.getElementById("gorgeta").textContent = "";
         document.getElementById("total").textContent = "";
@@ -176,9 +189,29 @@ function fecharMesa() {
         vazia.play();
         alert("Mesa invalida!");
     }
- 
+
 }
 
+function verificarPagamento() {
+    let pagamento = document.getElementById("pagamento").value;
+    console.log(pagamento)
+    if (pagamento == 1) {
+        contDinheiro = contDinheiro + 1;
+    } else if (pagamento == 2) {
+        contCredVisa = contCredVisa + 1;
+    } else if (pagamento == 3) {
+        contCredMast = contCredMast + 1;
+    } else if (pagamento == 4) {
+        contDebVisa = contDebVisa + 1;
+    } else if (pagamento == 5) {
+        contDebMast = contDebMast + 1;
+    } else if (pagamento == 6) {
+        contPix = contPix + 1;
+    } else if (pagamento == 7) {
+        contCheque = contCheque + 1;
+    }
+
+}
 //Ver consumo da mesa
 function consultarMesa() {
     let numMesa = document.getElementById("numMesa").value;
@@ -190,7 +223,7 @@ function consultarMesa() {
     let gorgetaValor = 0;
     numMesa = Number(numMesa); //Converter o valor input em number
 
-   
+
     if (numMesa > 1 && numMesa <= numMesas.length) { //Se ela for entre 2 e ultima mesa
         numMesa = numMesa - 1;  // tirar -1 para comparar com a lista que começa com 0
 
@@ -257,7 +290,7 @@ function comandar() {
     if (contadorProdutos === 0) {
         audioError.play();
         alert("Nenhum produto cadastrado");
-       
+
     }
     if (contadorProdutos !== 0) {
         mudarAba.play();
@@ -336,12 +369,12 @@ function lancarProduto() {
 
         mesaComandar = mesaComandar - 1;
         numMesas[mesaComandar].push(produtoNaLista); //adicionar produto novo
-        
+
         audioConfirmLancar.play();
     } else {
         audioError.play();
         alert("Não existe essa mesa!");
-    
+
     }
 
 }
@@ -354,6 +387,7 @@ function extrato() {
     let comandar = document.querySelector(".comandar");
     let extrato = document.querySelector(".extrato");
     let valorTotal = document.getElementById("valorArrecadado");
+    let dinheiroQnt = document.getElementById("dinheiroQnt");
 
     comandar.style.display = "none";
     mesas.style.display = "none";
@@ -363,4 +397,5 @@ function extrato() {
 
     //Inserir a variável valor total no htmk
     valorTotal.textContent = `Valor bruto gerado :  R$ ${extratoGeral.toFixed(2)} Reais`
+    dinheiroQnt.textContent = `${contDinheiro}`
 }
