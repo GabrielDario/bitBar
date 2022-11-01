@@ -6,7 +6,27 @@ let numeroMesas = 1; //variavel para fazer os botões da mesa
 let contadorProdutos = 0; //Variavel contadora para toda vez que abrir 'comandar'verificar se foi adicionado mais coisa
 let contadorComandar = 0; //Comparar com a contadorProdutos 
 let buttonPintar; // Para pintar as mesas que tem algo cadastrado
+
+//Variável do financeiro
 let extratoGeral = 0; //Receita do restaurante
+
+//Contadora da taxa 10%
+let pagouTaxa = 0;
+let naoPagouTaxa = 0;
+
+//Contador de cada metodo de pagamento
+let contDinheiro = 0;
+let contCred = 0;
+let contDeb = 0;
+let contPix = 0;
+let contCheque = 0;
+//quanto cada método arrecadou total
+let valDinheiro = 0;
+let valCred = 0;
+let valDeb = 0;
+let valPix = 0;
+let valCheque = 0;
+//Audio
 let audioDinheiro = new Audio('sons/dinheiro.mp3');
 let audioConfirmLancar = new Audio('sons/audioConfirmLancar.mp3');
 let audioError = new Audio('sons/error.wav');
@@ -64,10 +84,12 @@ function irProdutos() {
     let comandar = document.querySelector(".comandar");//no javascript (mostrar uma classe e tiras as outras)
     let produtos = document.querySelector(".produtos");
     let extrato = document.querySelector(".extrato");
+    let informacoes = document.querySelector(".informacoes");
 
     comandar.style.display = "none";
     todasAsMesas.style.display = "none";
     extrato.style.display = "none";
+    informacoes.style.display = "none";
     produtos.style.display = "block";
 }
 
@@ -107,7 +129,7 @@ function adicionarProdutos() {
     } else {
         audioError.play();
         alert("Cadastrado errado!");
-    
+
     }
 
 }
@@ -120,11 +142,13 @@ function irMesas() {
     let produtos = document.querySelector(".produtos");
     let comandar = document.querySelector(".comandar");
     let extrato = document.querySelector(".extrato");
+    let informacoes = document.querySelector(".informacoes");
 
     extrato.style.display = "none";
     comandar.style.display = "none";
     mesas.style.display = "none";
     produtos.style.display = "none";
+    informacoes.style.display = "none";
     numMesasHTML.style.display = "block"; //Mostrar essa div e apagar as anteriores
 
 }
@@ -132,13 +156,11 @@ function irMesas() {
 function fecharMesa() {
     let numMesa = document.getElementById("numMesa").value; //pegar valor num mesa no html
     numMesa = Number(numMesa);
-    console.log(numMesas);
-    console.log(numMesas[numMesa-1]);
-    console.log(numMesas[numMesa-1].length);
-    if (numMesas[numMesa-1].length === 0) {
+    let addValorExtrato;
+    if (numMesas[numMesa - 1].length === 0) {
         vazia.play();
         alert("Mesa Vazia!");
-      return;
+        return;
     }
 
     if (numMesa >= 1 && numMesa <= numMesas.length) { //Verificar se a mesa é válida (entre 1 e o máximo)
@@ -146,25 +168,31 @@ function fecharMesa() {
         fecharMesaSOM.play();
         numMesa = numMesa - 1; // converter número e tirar 1 porque a lista começa com 0
         for (let produtos = 0; produtos < numMesas[numMesa].length; produtos++) { //percorer lista de mesas dentro da mesa
-            let addValorExtrato = Number(numMesas[numMesa][produtos]);//variável local para armazenar uma por uma
+            addValorExtrato = Number(numMesas[numMesa][produtos]);//variável local para armazenar uma por uma
             let taxa = document.getElementById("taxa").value;
+
             if (taxa === "com") { // se tiver taxa de serviço
                 com10.play();
+                pagouTaxa = pagouTaxa + 1;
                 let gorgetaValor = addValorExtrato * 0.1; // faz valor vezes 0,1
                 addValorExtrato = addValorExtrato + gorgetaValor; // soma o valor total com valor multiplicado por 0,1
                 extratoGeral = extratoGeral + addValorExtrato;  // adicionando  na variavel global
-                
+
             } else {
                 sem10.play();
+                naoPagouTaxa = naoPagouTaxa + 1;
                 extratoGeral = extratoGeral + addValorExtrato;   // adicionando  na variavel global
             }
 
         }
+        verificarPagamento(addValorExtrato); //Verificar tipo de pagamento para contagem de cada método de pagamento e valor total
+        consultarMesa(); // Para consultar mesa e retornar vazia
         alert("Mesa paga !");
+
         for (let produtos = 0; produtos <= numMesas[numMesa].length; produtos++) {//For para removar todos os produtos da mesa e fechar conta
             numMesas[numMesa].shift();
         }
-        document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa+1}`;
+        document.getElementById("consultar").textContent = `CONTA DA MESA ${numMesa + 1}`;
         document.getElementById("consumo").textContent = "Mesa vazia";
         document.getElementById("gorgeta").textContent = "";
         document.getElementById("total").textContent = "";
@@ -176,9 +204,28 @@ function fecharMesa() {
         vazia.play();
         alert("Mesa invalida!");
     }
- 
+
 }
 
+function verificarPagamento(addValorExtrato) {
+    let pagamento = document.getElementById("pagamento").value;
+    if (pagamento == 1) {
+        contDinheiro = contDinheiro + 1; // Aumentador contador dinheiro
+        valDinheiro = valDinheiro + addValorExtrato;
+    } else if (pagamento == 2) {
+        contCred = contCred + 1;
+        valCred = valCred + addValorExtrato;
+    } else if (pagamento == 3) {
+        contDeb = contDeb + 1;
+        valDeb = valDeb + addValorExtrato;
+    } else if (pagamento == 4) {
+        contPix = contPix + 1;
+        valPix = valPix + addValorExtrato;
+    } else if (pagamento == 5) {
+        contCheque = contCheque + 1;
+        valCheque = valCheque + addValorExtrato;
+    }
+}
 //Ver consumo da mesa
 function consultarMesa() {
     let numMesa = document.getElementById("numMesa").value;
@@ -190,7 +237,7 @@ function consultarMesa() {
     let gorgetaValor = 0;
     numMesa = Number(numMesa); //Converter o valor input em number
 
-   
+
     if (numMesa > 1 && numMesa <= numMesas.length) { //Se ela for entre 2 e ultima mesa
         numMesa = numMesa - 1;  // tirar -1 para comparar com a lista que começa com 0
 
@@ -257,7 +304,7 @@ function comandar() {
     if (contadorProdutos === 0) {
         audioError.play();
         alert("Nenhum produto cadastrado");
-       
+
     }
     if (contadorProdutos !== 0) {
         mudarAba.play();
@@ -267,11 +314,13 @@ function comandar() {
         let comandar = document.querySelector(".comandar");
         let extrato = document.querySelector(".extrato");
         let idProdutoNaLista = document.getElementById("produtoNaLista");
+        let informacoes = document.querySelector(".informacoes");
 
         numMesasHTML.style.display = "none";
         mesas.style.display = "none";
         extrato.style.display = "none";
         produtos.style.display = "none";
+        informacoes.style.display = "none";
         comandar.style.display = "block";
 
         if (contadorProdutos !== contadorComandar && contadorProdutos > contadorComandar) {
@@ -336,16 +385,16 @@ function lancarProduto() {
 
         mesaComandar = mesaComandar - 1;
         numMesas[mesaComandar].push(produtoNaLista); //adicionar produto novo
-        
+
         audioConfirmLancar.play();
     } else {
         audioError.play();
         alert("Não existe essa mesa!");
-    
+
     }
 
 }
-
+//Abrir Controle Financeiro
 function extrato() {
     audioDinheiro.play();
     let numMesasHTML = document.querySelector(".todasAsMesas");
@@ -353,14 +402,93 @@ function extrato() {
     let produtos = document.querySelector(".produtos");
     let comandar = document.querySelector(".comandar");
     let extrato = document.querySelector(".extrato");
+    let informacoes = document.querySelector(".informacoes");
+
     let valorTotal = document.getElementById("valorArrecadado");
+
+    let dinheiroQnt = document.getElementById("dinheiroQnt");
+    let qntCredito = document.getElementById("qntCredito");
+    let qntDebito = document.getElementById("qntDebito");
+    let pix = document.getElementById("pix");
+    let cheque = document.getElementById("cheque");
+
+    let valorDinheiroVar = document.getElementById("valorDinheiro");
+    let valorCreditoVar = document.getElementById("valorCredito");
+    let valorDebitoVar = document.getElementById("valorDebito");
+    let valorPixVar = document.getElementById("valorPix");
+    let valorChequeVar = document.getElementById("valorCheque");
 
     comandar.style.display = "none";
     mesas.style.display = "none";
     produtos.style.display = "none";
     numMesasHTML.style.display = "none";
+    informacoes.style.display = "none";
     extrato.style.display = "block";
 
     //Inserir a variável valor total no htmk
-    valorTotal.textContent = `Valor bruto gerado :  R$ ${extratoGeral.toFixed(2)} Reais`
+    valorTotal.textContent = `Valor bruto gerado :  R$ ${extratoGeral.toFixed(2)} Reais`;
+    dinheiroQnt.textContent = `${contDinheiro}`;
+    qntCredito.textContent = `${contCred}`;
+    qntDebito.textContent = `${contDeb}`;
+    pix.textContent = `${contPix}`;
+    cheque.textContent = `${contCheque}`;
+
+    valorDinheiroVar.textContent = `R$${valDinheiro.toFixed(2)}`;
+    valorCreditoVar.textContent = `R$${valCred.toFixed(2)}`;
+    valorDebitoVar.textContent = `R$${valDeb.toFixed(2)}`;
+    valorPixVar.textContent = `R$${valPix.toFixed(2)}`;
+    valorChequeVar.textContent = `R$${valCheque.toFixed(2)}`;
+
+}
+
+//Abrir informações gerais
+function infGeral() {
+
+    let numMesasHTML = document.querySelector(".todasAsMesas");
+    let mesas = document.querySelector(".mesas");
+    let produtos = document.querySelector(".produtos");
+    let comandar = document.querySelector(".comandar");
+    let extrato = document.querySelector(".extrato");
+
+    let ticketMedio = document.getElementById("ticketMedio");
+    let qntCom10 = document.getElementById("qntCom10");
+    let qntSem10 = document.getElementById("qntSem10");
+    let porcCom10 = document.getElementById("porcCom10");
+    let porcSem10 = document.getElementById("porcSem10");
+
+    let mesasFechadas = document.getElementById("mesasFechadas");
+
+    let tm;
+
+    let informacoes = document.querySelector(".informacoes");
+    informacoes.style.display = "block";
+    comandar.style.display = "none";
+    mesas.style.display = "none";
+    produtos.style.display = "none";
+    numMesasHTML.style.display = "none";
+    extrato.style.display = "none";
+
+
+    tm = extratoGeral / (contDinheiro + contCred + contDeb + contPix + contCheque);
+    ticketMedio.textContent = `R$ ${tm.toFixed(2)}`;
+
+    if (isNaN(tm)) {
+        console.log("FOI");
+        ticketMedio.textContent = "R$ 0";
+    }
+    let mesasTotal = pagouTaxa + naoPagouTaxa;
+    mesasFechadas.textContent = `${mesasTotal}`
+
+
+    qntCom10.textContent = `${pagouTaxa} mesas pagaram a taxa`;
+    qntSem10.textContent = `${naoPagouTaxa} mesas NÃO pagaram a taxa`;
+
+    let calculo1 = 100 / mesasTotal;
+    let calculo2 = calculo1 * pagouTaxa;
+    let calculo21 = calculo1 * naoPagouTaxa;
+
+    porcCom10.textContent = `${calculo2.toFixed(2)}% Gostaram do atendimento`;
+    porcSem10.textContent = `${calculo21.toFixed(2)}% Não gostaram do atendimento`;
+    console.log(calculo1,pagouTaxa)
+ 
 }
