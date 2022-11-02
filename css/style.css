@@ -2,7 +2,7 @@ body {
     text-align: center;
     background-image: url("../img/background.webp");
 
-    background-size: 1319px;
+    background-size: 1367px;
 }
 @font-face {
     font-family: CinzelDecorative-Regular;
@@ -44,7 +44,7 @@ table {
 }
 .mesas p {
     font-size: 35px;
-    color: rgb(190, 16, 16);
+    color: rgb(0, 153, 255);
     font-weight: bold;
 }
 .produtos p {

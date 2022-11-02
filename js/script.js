@@ -27,10 +27,10 @@ let valDeb = 0;
 let valPix = 0;
 let valCheque = 0;
 //Audio
-let audioDinheiro = new Audio('sons/dinheiro.mp3');
+let caixaregistradora = new Audio('sons/caixaregistradora.mp3');
 let audioConfirmLancar = new Audio('sons/audioConfirmLancar.mp3');
 let audioError = new Audio('sons/error.wav');
-let fecharMesaSOM = new Audio('sons/fecharMesa.wav');
+let fecharMesaSOM = new Audio('sons/fecharMesa.mp3');
 let com10 = new Audio('sons/com10.mp3');
 let sem10 = new Audio('sons/sem10.mp3');
 let addProduto = new Audio('sons/addProduto.mp3');
@@ -172,14 +172,14 @@ function fecharMesa() {
             let taxa = document.getElementById("taxa").value;
 
             if (taxa === "com") { // se tiver taxa de serviço
-                com10.play();
+                //com10.play();
                 pagouTaxa = pagouTaxa + 1;
                 let gorgetaValor = addValorExtrato * 0.1; // faz valor vezes 0,1
                 addValorExtrato = addValorExtrato + gorgetaValor; // soma o valor total com valor multiplicado por 0,1
                 extratoGeral = extratoGeral + addValorExtrato;  // adicionando  na variavel global
 
             } else {
-                sem10.play();
+                //sem10.play();
                 naoPagouTaxa = naoPagouTaxa + 1;
                 extratoGeral = extratoGeral + addValorExtrato;   // adicionando  na variavel global
             }
@@ -396,7 +396,7 @@ function lancarProduto() {
 }
 //Abrir Controle Financeiro
 function extrato() {
-    audioDinheiro.play();
+    caixaregistradora.play();
     let numMesasHTML = document.querySelector(".todasAsMesas");
     let mesas = document.querySelector(".mesas");
     let produtos = document.querySelector(".produtos");
