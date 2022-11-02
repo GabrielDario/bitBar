@@ -12,9 +12,32 @@
 
 <body id="body">
     <!-- Aba inicial para ver quantas mesas e nome do restaurante -->
-    <h1>Monte seu restaurante</h1>
+   <!-- Aba inicial para ver quantas mesas e nome do restaurante -->
+   <h1 id="tituloRestaurante">Monte seu estabelecimento</h1>
     <div class="mesas">
-        <p>Quantas mesas seu restaurante tem? 1 a 50 </p><input type="number" id="numMesas">
+        <p>Quantas mesas seu restaurante tem? 1 a 50 </p>
+        Nº Mesas <input type="number" id="numMesas"> <br><br>
+        Tipo do estabelecimento
+        <select id="tipoEstab">
+            <option value="Churrascaria">Churrascaria</option>
+            <option value="Pizzaria">Pizzaria</option>
+            <option value="Lanchonete">Lanchonete</option>
+            <option value="Sushi">Sushi</option>
+            <option value="Cafeteria">Cafeteria</option>
+            <option value="Sorveteria">Sorveteria</option>
+            <option value="Hamburgueria">Hamburgueria</option>
+            <option value="Bar">Bar</option>
+            <option value="PUB">PUB</option>
+            <option value="Boteco">Boteco</option>
+            <option value="Pastelaria">Pastelaria</option>
+        </select>
+       
+        <select id="artigo">
+            <option value="do">do</option>
+            <option value="da">da</option>
+        </select>
+        <br><br>
+        Nome do estabelecimento <input type="text" id="nomeEstab"> <br><br>
         <input type="button" value="Enviar" onclick="qntMesas();">
     </div>
 

@@ -38,42 +38,49 @@ let mudarAba = new Audio('sons/jump.mp3');
 let vazia = new Audio('sons/vazia.mp3');
 //Função para saber quantas mesas serão adicionadas
 function qntMesas() {
-    //elementos HTML que quero manipular (mostrar,não mostrar...)
-    numMesasHTML = document.getElementById("numMesas").value;
-    let mesas = document.querySelector(".mesas");
-    let todasAsMesas = document.querySelector(".todasAsMesas");
-    let produtos = document.querySelector(".produtos");
+   //elementos HTML que quero manipular (mostrar,não mostrar...)
+   numMesasHTML = document.getElementById("numMesas").value;
+   let mesas = document.querySelector(".mesas");
+   let todasAsMesas = document.querySelector(".todasAsMesas");
+   let produtos = document.querySelector(".produtos");
 
-    //se o valor for entre 0 e 50
-    if (numMesasHTML > 0 && numMesasHTML <= 50) {
-        mesas.style.display = "none";  //Apenas para alterar html(3)
-        todasAsMesas.style.display = "none";
-        produtos.style.display = "block";
-        //Criar lista vazias até o número que o usuário colocou
-        for (let i = 1; i <= numMesasHTML; i++) {
-            numMesas.unshift([]);
-        }
-        //enquanto o numeroMesas(começa com 1) não for igual a números de mesas total,faça
-        while (numeroMesas <= numMesas.length) {
-            btn = document.createElement("button"); //cria um botão
+   let tipoEstab = document.getElementById("tipoEstab").value;
+   let nomeEstab = document.getElementById("nomeEstab").value;
+   let artigo = document.getElementById("artigo").value;
 
-            btn.innerHTML = numeroMesas; //numero da mesa
-            btn.value = numeroMesas;
-            btn.type = "submit";
-            btn.name = "button";
-            btn.id = "mesa" + numeroMesas; //dar id no button (USAR MAIS PARA FRENTE)
-            // btn.addEventListener("click", verificarButton);
-            document.querySelector('.todasAsMesas').appendChild(btn); //Definindo classe pai e filha
-            if (numeroMesas % 5 == 0) { //quando der 5 mesas,ele vai quebrar linha com <br>
-                let br = document.createElement("br");
-                document.querySelector('.todasAsMesas').appendChild(br);
-            }
-            numeroMesas++; // adicionando +1 nessa variavel
-        }
-    } else {
-        audioError.play();
-        alert("Entre 0 e 50 mesas!"); //Valor incorreto
-    }
+   //se o valor for entre 0 e 50
+   if (numMesasHTML > 0 && numMesasHTML <= 50 && tipoEstab !== "" && nomeEstab !== "") {
+       mesas.style.display = "none";  //Apenas para alterar html(3)
+       todasAsMesas.style.display = "none";
+       produtos.style.display = "block";
+       //Criar lista vazias até o número que o usuário colocou
+       for (let i = 1; i <= numMesasHTML; i++) {
+           numMesas.unshift([]);
+       }
+       //enquanto o numeroMesas(começa com 1) não for igual a números de mesas total,faça
+       while (numeroMesas <= numMesas.length) {
+           btn = document.createElement("button"); //cria um botão
+
+           btn.innerHTML = numeroMesas; //numero da mesa
+           btn.value = numeroMesas;
+           btn.type = "submit";
+           btn.name = "button";
+           btn.id = "mesa" + numeroMesas; //dar id no button (USAR MAIS PARA FRENTE)
+           // btn.addEventListener("click", verificarButton);
+           document.querySelector('.todasAsMesas').appendChild(btn); //Definindo classe pai e filha
+           if (numeroMesas % 5 == 0) { //quando der 5 mesas,ele vai quebrar linha com <br>
+               let br = document.createElement("br");
+               document.querySelector('.todasAsMesas').appendChild(br);
+           }
+           numeroMesas++; // adicionando +1 nessa variavel
+
+           let titulo = document.getElementById("tituloRestaurante");
+           titulo.textContent = `${tipoEstab} ${artigo} ${nomeEstab}`;
+       }
+   } else {
+       audioError.play();
+       alert("Entre 0 e 50 mesas! ou nomes vazio"); //Valor incorreto
+   }
 
 }
 
