@@ -38,49 +38,49 @@ let mudarAba = new Audio('sons/jump.mp3');
 let vazia = new Audio('sons/vazia.mp3');
 //Função para saber quantas mesas serão adicionadas
 function qntMesas() {
-   //elementos HTML que quero manipular (mostrar,não mostrar...)
-   numMesasHTML = document.getElementById("numMesas").value;
-   let mesas = document.querySelector(".mesas");
-   let todasAsMesas = document.querySelector(".todasAsMesas");
-   let produtos = document.querySelector(".produtos");
+    //elementos HTML que quero manipular (mostrar,não mostrar...)
+    numMesasHTML = document.getElementById("numMesas").value;
+    let mesas = document.querySelector(".mesas");
+    let todasAsMesas = document.querySelector(".todasAsMesas");
+    let produtos = document.querySelector(".produtos");
 
-   let tipoEstab = document.getElementById("tipoEstab").value;
-   let nomeEstab = document.getElementById("nomeEstab").value;
-   let artigo = document.getElementById("artigo").value;
+    let tipoEstab = document.getElementById("tipoEstab").value;
+    let nomeEstab = document.getElementById("nomeEstab").value;
+    let artigo = document.getElementById("artigo").value;
 
-   //se o valor for entre 0 e 50
-   if (numMesasHTML > 0 && numMesasHTML <= 50 && tipoEstab !== "" && nomeEstab !== "") {
-       mesas.style.display = "none";  //Apenas para alterar html(3)
-       todasAsMesas.style.display = "none";
-       produtos.style.display = "block";
-       //Criar lista vazias até o número que o usuário colocou
-       for (let i = 1; i <= numMesasHTML; i++) {
-           numMesas.unshift([]);
-       }
-       //enquanto o numeroMesas(começa com 1) não for igual a números de mesas total,faça
-       while (numeroMesas <= numMesas.length) {
-           btn = document.createElement("button"); //cria um botão
+    //se o valor for entre 0 e 50
+    if (numMesasHTML > 0 && numMesasHTML <= 50 && tipoEstab !== "" && nomeEstab !== "") {
+        mesas.style.display = "none";  //Apenas para alterar html(3)
+        todasAsMesas.style.display = "none";
+        produtos.style.display = "block";
+        //Criar lista vazias até o número que o usuário colocou
+        for (let i = 1; i <= numMesasHTML; i++) {
+            numMesas.unshift([]);
+        }
+        //enquanto o numeroMesas(começa com 1) não for igual a números de mesas total,faça
+        while (numeroMesas <= numMesas.length) {
+            btn = document.createElement("button"); //cria um botão
 
-           btn.innerHTML = numeroMesas; //numero da mesa
-           btn.value = numeroMesas;
-           btn.type = "submit";
-           btn.name = "button";
-           btn.id = "mesa" + numeroMesas; //dar id no button (USAR MAIS PARA FRENTE)
-           // btn.addEventListener("click", verificarButton);
-           document.querySelector('.todasAsMesas').appendChild(btn); //Definindo classe pai e filha
-           if (numeroMesas % 5 == 0) { //quando der 5 mesas,ele vai quebrar linha com <br>
-               let br = document.createElement("br");
-               document.querySelector('.todasAsMesas').appendChild(br);
-           }
-           numeroMesas++; // adicionando +1 nessa variavel
+            btn.innerHTML = numeroMesas; //numero da mesa
+            btn.value = numeroMesas;
+            btn.type = "submit";
+            btn.name = "button";
+            btn.id = "mesa" + numeroMesas; //dar id no button (USAR MAIS PARA FRENTE)
+            // btn.addEventListener("click", verificarButton);
+            document.querySelector('.todasAsMesas').appendChild(btn); //Definindo classe pai e filha
+            if (numeroMesas % 5 == 0) { //quando der 5 mesas,ele vai quebrar linha com <br>
+                let br = document.createElement("br");
+                document.querySelector('.todasAsMesas').appendChild(br);
+            }
+            numeroMesas++; // adicionando +1 nessa variavel
 
-           let titulo = document.getElementById("tituloRestaurante");
-           titulo.textContent = `${tipoEstab} ${artigo} ${nomeEstab}`;
-       }
-   } else {
-       audioError.play();
-       alert("Entre 0 e 50 mesas! ou nomes vazio"); //Valor incorreto
-   }
+            let titulo = document.getElementById("tituloRestaurante");
+            titulo.textContent = `${tipoEstab} ${artigo} ${nomeEstab}`;
+        }
+    } else {
+        audioError.play();
+        alert("Entre 0 e 50 mesas! ou nomes vazio"); //Valor incorreto
+    }
 
 }
 
@@ -163,6 +163,7 @@ function irMesas() {
 function fecharMesa() {
     let numMesa = document.getElementById("numMesa").value; //pegar valor num mesa no html
     numMesa = Number(numMesa);
+    let taxa = document.getElementById("taxa").value;
     let addValorExtrato;
     if (numMesas[numMesa - 1].length === 0) {
         vazia.play();
@@ -176,23 +177,26 @@ function fecharMesa() {
         numMesa = numMesa - 1; // converter número e tirar 1 porque a lista começa com 0
         for (let produtos = 0; produtos < numMesas[numMesa].length; produtos++) { //percorer lista de mesas dentro da mesa
             addValorExtrato = Number(numMesas[numMesa][produtos]);//variável local para armazenar uma por uma
-            let taxa = document.getElementById("taxa").value;
 
             if (taxa === "com") { // se tiver taxa de serviço
-                //com10.play();
-                pagouTaxa = pagouTaxa + 1;
                 let gorgetaValor = addValorExtrato * 0.1; // faz valor vezes 0,1
                 addValorExtrato = addValorExtrato + gorgetaValor; // soma o valor total com valor multiplicado por 0,1
                 extratoGeral = extratoGeral + addValorExtrato;  // adicionando  na variavel global
 
             } else {
-                //sem10.play();
-                naoPagouTaxa = naoPagouTaxa + 1;
                 extratoGeral = extratoGeral + addValorExtrato;   // adicionando  na variavel global
             }
 
         }
-        verificarPagamento(addValorExtrato); //Verificar tipo de pagamento para contagem de cada método de pagamento e valor total
+        if (taxa === "com") {
+            pagouTaxa = pagouTaxa + 1;
+
+        } else {
+            naoPagouTaxa = naoPagouTaxa + 1;
+
+        }
+
+        verificarPagamento(extratoGeral); //Verificar tipo de pagamento para contagem de cada método de pagamento e valor total
         consultarMesa(); // Para consultar mesa e retornar vazia
         alert("Mesa paga !");
 
@@ -214,23 +218,23 @@ function fecharMesa() {
 
 }
 
-function verificarPagamento(addValorExtrato) {
+function verificarPagamento(extratoGeral) {
     let pagamento = document.getElementById("pagamento").value;
     if (pagamento == 1) {
         contDinheiro = contDinheiro + 1; // Aumentador contador dinheiro
-        valDinheiro = valDinheiro + addValorExtrato;
+        valDinheiro = extratoGeral - valCred - valDeb - valPix - valCheque; // extrato geral - todos(menos dinheiro)
     } else if (pagamento == 2) {
         contCred = contCred + 1;
-        valCred = valCred + addValorExtrato;
+        valCred = extratoGeral - valDinheiro - valDeb - valPix - valCheque;
     } else if (pagamento == 3) {
         contDeb = contDeb + 1;
-        valDeb = valDeb + addValorExtrato;
+        valDeb = extratoGeral - valDinheiro - valCred - valPix - valCheque;
     } else if (pagamento == 4) {
         contPix = contPix + 1;
-        valPix = valPix + addValorExtrato;
+        valPix = extratoGeral - valDinheiro - valDeb - valCred - valCheque;
     } else if (pagamento == 5) {
         contCheque = contCheque + 1;
-        valCheque = valCheque + addValorExtrato;
+        valCheque = extratoGeral - valDinheiro - valDeb - valCred - valPix;
     }
 }
 //Ver consumo da mesa
@@ -450,7 +454,7 @@ function extrato() {
 
 //Abrir informações gerais
 function infGeral() {
-
+    mudarAba.play();
     let numMesasHTML = document.querySelector(".todasAsMesas");
     let mesas = document.querySelector(".mesas");
     let produtos = document.querySelector(".produtos");
@@ -464,8 +468,8 @@ function infGeral() {
     let porcSem10 = document.getElementById("porcSem10");
 
     let mesasFechadas = document.getElementById("mesasFechadas");
-
-    let tm;
+    mudarAba
+    let tm; //ticket médio
 
     let informacoes = document.querySelector(".informacoes");
     informacoes.style.display = "block";
@@ -475,14 +479,15 @@ function infGeral() {
     numMesasHTML.style.display = "none";
     extrato.style.display = "none";
 
-
+    //Ticket médio calculo somar tudo e dividir
     tm = extratoGeral / (contDinheiro + contCred + contDeb + contPix + contCheque);
     ticketMedio.textContent = `R$ ${tm.toFixed(2)}`;
 
+    //se for NOT A NUMBER, INSERIR 0
     if (isNaN(tm)) {
-        console.log("FOI");
         ticketMedio.textContent = "R$ 0";
     }
+
     let mesasTotal = pagouTaxa + naoPagouTaxa;
     mesasFechadas.textContent = `${mesasTotal}`
 
@@ -490,12 +495,23 @@ function infGeral() {
     qntCom10.textContent = `${pagouTaxa} mesas pagaram a taxa`;
     qntSem10.textContent = `${naoPagouTaxa} mesas NÃO pagaram a taxa`;
 
-    let calculo1 = 100 / mesasTotal;
-    let calculo2 = calculo1 * pagouTaxa;
-    let calculo21 = calculo1 * naoPagouTaxa;
 
-    porcCom10.textContent = `${calculo2.toFixed(2)}% Gostaram do atendimento`;
-    porcSem10.textContent = `${calculo21.toFixed(2)}% Não gostaram do atendimento`;
-    console.log(calculo1,pagouTaxa)
- 
+    let calculo = 100 / mesasTotal;
+    let porcentagemCom = calculo * pagouTaxa;
+    let porcentagemSem = calculo * naoPagouTaxa;
+
+    if (isNaN(porcentagemCom)) {
+        console.log("É nulo");
+        porcentagemCom = 0;
+
+    }
+    if (isNaN(porcentagemSem)) {
+        console.log("É nulo");
+        porcentagemSem = 0;
+
+    }
+    porcCom10.textContent = `${porcentagemCom.toFixed(2)}% Gostaram do atendimento`;
+    porcSem10.textContent = `${porcentagemSem.toFixed(2)}% Não gostaram do atendimento`;
+
+
 }
