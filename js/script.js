@@ -27,15 +27,13 @@ let valDeb = 0;
 let valPix = 0;
 let valCheque = 0;
 //Audio
-let caixaregistradora = new Audio('sons/caixaregistradora.mp3');
-let audioConfirmLancar = new Audio('sons/audioConfirmLancar.mp3');
+let caixaregistradora = new Audio('sounds/cashRegister.mp3');
+let audioConfirmLancar = new Audio('sounds/positive.wav');
 let audioError = new Audio('sons/error.wav');
-let fecharMesaSOM = new Audio('sons/fecharMesa.mp3');
-let com10 = new Audio('sons/com10.mp3');
-let sem10 = new Audio('sons/sem10.mp3');
-let addProduto = new Audio('sons/addProduto.mp3');
-let mudarAba = new Audio('sons/jump.mp3');
-let vazia = new Audio('sons/vazia.mp3');
+let fecharMesaSOM = new Audio('sounds/dinheiro.wav');
+let addProduto = new Audio('sons/addProduto.wav');
+let mudarAba = new Audio('sounds/aba.wav');
+let vazia = new Audio('sounds/error.wav');
 //Função para saber quantas mesas serão adicionadas
 function qntMesas() {
     //elementos HTML que quero manipular (mostrar,não mostrar...)
