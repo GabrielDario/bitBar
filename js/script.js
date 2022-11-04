@@ -27,10 +27,10 @@ let valDeb = 0;
 let valPix = 0;
 let valCheque = 0;
 //Audio
-let audioDinheiro = new Audio('sons/dinheiro.mp3');
+let caixaregistradora = new Audio('sons/caixaregistradora.mp3');
 let audioConfirmLancar = new Audio('sons/audioConfirmLancar.mp3');
 let audioError = new Audio('sons/error.wav');
-let fecharMesaSOM = new Audio('sons/fecharMesa.wav');
+let fecharMesaSOM = new Audio('sons/fecharMesa.mp3');
 let com10 = new Audio('sons/com10.mp3');
 let sem10 = new Audio('sons/sem10.mp3');
 let addProduto = new Audio('sons/addProduto.mp3');
@@ -44,8 +44,12 @@ function qntMesas() {
     let todasAsMesas = document.querySelector(".todasAsMesas");
     let produtos = document.querySelector(".produtos");
 
+    let tipoEstab = document.getElementById("tipoEstab").value;
+    let nomeEstab = document.getElementById("nomeEstab").value;
+    let artigo = document.getElementById("artigo").value;
+
     //se o valor for entre 0 e 50
-    if (numMesasHTML > 0 && numMesasHTML <= 50) {
+    if (numMesasHTML > 0 && numMesasHTML <= 50 && tipoEstab !== "" && nomeEstab !== "") {
         mesas.style.display = "none";  //Apenas para alterar html(3)
         todasAsMesas.style.display = "none";
         produtos.style.display = "block";
@@ -69,10 +73,13 @@ function qntMesas() {
                 document.querySelector('.todasAsMesas').appendChild(br);
             }
             numeroMesas++; // adicionando +1 nessa variavel
+
+            let titulo = document.getElementById("tituloRestaurante");
+            titulo.textContent = `${tipoEstab} ${artigo} ${nomeEstab}`;
         }
     } else {
         audioError.play();
-        alert("Entre 0 e 50 mesas!"); //Valor incorreto
+        alert("Entre 0 e 50 mesas! ou nomes vazio"); //Valor incorreto
     }
 
 }
@@ -85,12 +92,13 @@ function irProdutos() {
     let produtos = document.querySelector(".produtos");
     let extrato = document.querySelector(".extrato");
     let informacoes = document.querySelector(".informacoes");
-
+ 
     comandar.style.display = "none";
     todasAsMesas.style.display = "none";
     extrato.style.display = "none";
     informacoes.style.display = "none";
     produtos.style.display = "block";
+ 
 }
 
 //Adicionando produtos na lista
@@ -108,7 +116,7 @@ function adicionarProdutos() {
         document.getElementById("precoProduto").value = ""; //deixando ele vazio
         nomeProduto = nomeProduto.toUpperCase(); //Convertendo para tudo maiusculo
 
-        produtosLista.push([nomeProduto]); //Adicionamento nome do produto em uma lista
+        produtosLista.push(nomeProduto); //Adicionamento nome do produto em uma lista
         precoLista.push([precoProduto]);//Adicionamento valor do produto em outra lista
 
         //Criando td e tr dentro da tabela(#tabela) já criada no html
@@ -143,7 +151,7 @@ function irMesas() {
     let comandar = document.querySelector(".comandar");
     let extrato = document.querySelector(".extrato");
     let informacoes = document.querySelector(".informacoes");
-
+ 
     extrato.style.display = "none";
     comandar.style.display = "none";
     mesas.style.display = "none";
@@ -156,6 +164,7 @@ function irMesas() {
 function fecharMesa() {
     let numMesa = document.getElementById("numMesa").value; //pegar valor num mesa no html
     numMesa = Number(numMesa);
+    let taxa = document.getElementById("taxa").value;
     let addValorExtrato;
     if (numMesas[numMesa - 1].length === 0) {
         vazia.play();
@@ -169,23 +178,26 @@ function fecharMesa() {
         numMesa = numMesa - 1; // converter número e tirar 1 porque a lista começa com 0
         for (let produtos = 0; produtos < numMesas[numMesa].length; produtos++) { //percorer lista de mesas dentro da mesa
             addValorExtrato = Number(numMesas[numMesa][produtos]);//variável local para armazenar uma por uma
-            let taxa = document.getElementById("taxa").value;
 
             if (taxa === "com") { // se tiver taxa de serviço
-                com10.play();
-                pagouTaxa = pagouTaxa + 1;
                 let gorgetaValor = addValorExtrato * 0.1; // faz valor vezes 0,1
                 addValorExtrato = addValorExtrato + gorgetaValor; // soma o valor total com valor multiplicado por 0,1
                 extratoGeral = extratoGeral + addValorExtrato;  // adicionando  na variavel global
 
             } else {
-                sem10.play();
-                naoPagouTaxa = naoPagouTaxa + 1;
                 extratoGeral = extratoGeral + addValorExtrato;   // adicionando  na variavel global
             }
 
         }
-        verificarPagamento(addValorExtrato); //Verificar tipo de pagamento para contagem de cada método de pagamento e valor total
+        if (taxa === "com") {
+            pagouTaxa = pagouTaxa + 1;
+
+        } else {
+            naoPagouTaxa = naoPagouTaxa + 1;
+
+        }
+
+        verificarPagamento(extratoGeral); //Verificar tipo de pagamento para contagem de cada método de pagamento e valor total
         consultarMesa(); // Para consultar mesa e retornar vazia
         alert("Mesa paga !");
 
@@ -207,23 +219,23 @@ function fecharMesa() {
 
 }
 
-function verificarPagamento(addValorExtrato) {
+function verificarPagamento(extratoGeral) {
     let pagamento = document.getElementById("pagamento").value;
     if (pagamento == 1) {
         contDinheiro = contDinheiro + 1; // Aumentador contador dinheiro
-        valDinheiro = valDinheiro + addValorExtrato;
+        valDinheiro = extratoGeral - valCred - valDeb - valPix - valCheque; // extrato geral - todos(menos dinheiro)
     } else if (pagamento == 2) {
         contCred = contCred + 1;
-        valCred = valCred + addValorExtrato;
+        valCred = extratoGeral - valDinheiro - valDeb - valPix - valCheque;
     } else if (pagamento == 3) {
         contDeb = contDeb + 1;
-        valDeb = valDeb + addValorExtrato;
+        valDeb = extratoGeral - valDinheiro - valCred - valPix - valCheque;
     } else if (pagamento == 4) {
         contPix = contPix + 1;
-        valPix = valPix + addValorExtrato;
+        valPix = extratoGeral - valDinheiro - valDeb - valCred - valCheque;
     } else if (pagamento == 5) {
         contCheque = contCheque + 1;
-        valCheque = valCheque + addValorExtrato;
+        valCheque = extratoGeral - valDinheiro - valDeb - valCred - valPix;
     }
 }
 //Ver consumo da mesa
@@ -316,6 +328,8 @@ function comandar() {
         let idProdutoNaLista = document.getElementById("produtoNaLista");
         let informacoes = document.querySelector(".informacoes");
 
+    
+
         numMesasHTML.style.display = "none";
         mesas.style.display = "none";
         extrato.style.display = "none";
@@ -355,6 +369,7 @@ function comandar() {
             option.text = produtosLista[produto];
             option.value = precoLista[produto];
             idProdutoNaLista.add(option);
+     
             contadorComandar = contadorProdutos;
         }
     }
@@ -396,13 +411,14 @@ function lancarProduto() {
 }
 //Abrir Controle Financeiro
 function extrato() {
-    audioDinheiro.play();
+    caixaregistradora.play();
     let numMesasHTML = document.querySelector(".todasAsMesas");
     let mesas = document.querySelector(".mesas");
     let produtos = document.querySelector(".produtos");
     let comandar = document.querySelector(".comandar");
     let extrato = document.querySelector(".extrato");
     let informacoes = document.querySelector(".informacoes");
+
 
     let valorTotal = document.getElementById("valorArrecadado");
 
@@ -425,6 +441,7 @@ function extrato() {
     informacoes.style.display = "none";
     extrato.style.display = "block";
 
+
     //Inserir a variável valor total no htmk
     valorTotal.textContent = `Valor bruto gerado :  R$ ${extratoGeral.toFixed(2)} Reais`;
     dinheiroQnt.textContent = `${contDinheiro}`;
@@ -443,22 +460,12 @@ function extrato() {
 
 //Abrir informações gerais
 function infGeral() {
-
+    mudarAba.play();
     let numMesasHTML = document.querySelector(".todasAsMesas");
     let mesas = document.querySelector(".mesas");
     let produtos = document.querySelector(".produtos");
     let comandar = document.querySelector(".comandar");
     let extrato = document.querySelector(".extrato");
-
-    let ticketMedio = document.getElementById("ticketMedio");
-    let qntCom10 = document.getElementById("qntCom10");
-    let qntSem10 = document.getElementById("qntSem10");
-    let porcCom10 = document.getElementById("porcCom10");
-    let porcSem10 = document.getElementById("porcSem10");
-
-    let mesasFechadas = document.getElementById("mesasFechadas");
-
-    let tm;
 
     let informacoes = document.querySelector(".informacoes");
     informacoes.style.display = "block";
@@ -469,13 +476,26 @@ function infGeral() {
     extrato.style.display = "none";
 
 
+    let ticketMedio = document.getElementById("ticketMedio");
+    let qntCom10 = document.getElementById("qntCom10");
+    let qntSem10 = document.getElementById("qntSem10");
+    let porcCom10 = document.getElementById("porcCom10");
+    let porcSem10 = document.getElementById("porcSem10");
+
+    let mesasFechadas = document.getElementById("mesasFechadas");
+    mudarAba
+    let tm; //ticket médio
+
+
+    //Ticket médio calculo somar tudo e dividir
     tm = extratoGeral / (contDinheiro + contCred + contDeb + contPix + contCheque);
     ticketMedio.textContent = `R$ ${tm.toFixed(2)}`;
 
+    //se for NOT A NUMBER, INSERIR 0
     if (isNaN(tm)) {
-        console.log("FOI");
         ticketMedio.textContent = "R$ 0";
     }
+
     let mesasTotal = pagouTaxa + naoPagouTaxa;
     mesasFechadas.textContent = `${mesasTotal}`
 
@@ -483,12 +503,19 @@ function infGeral() {
     qntCom10.textContent = `${pagouTaxa} mesas pagaram a taxa`;
     qntSem10.textContent = `${naoPagouTaxa} mesas NÃO pagaram a taxa`;
 
-    let calculo1 = 100 / mesasTotal;
-    let calculo2 = calculo1 * pagouTaxa;
-    let calculo21 = calculo1 * naoPagouTaxa;
 
-    porcCom10.textContent = `${calculo2.toFixed(2)}% Gostaram do atendimento`;
-    porcSem10.textContent = `${calculo21.toFixed(2)}% Não gostaram do atendimento`;
-    console.log(calculo1,pagouTaxa)
- 
+    let calculo = 100 / mesasTotal;
+    let porcentagemCom = calculo * pagouTaxa;
+    let porcentagemSem = calculo * naoPagouTaxa;
+
+    if (isNaN(porcentagemCom)) {
+        porcentagemCom = 0
+    }
+    if (isNaN(porcentagemSem)) {
+        porcentagemSem = 0;
+    }
+    porcCom10.textContent = `${porcentagemCom.toFixed(2)}% Gostaram do atendimento`;
+    porcSem10.textContent = `${porcentagemSem.toFixed(2)}% Não gostaram do atendimento`;
+
+
 }

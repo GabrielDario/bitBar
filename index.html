@@ -6,15 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <script src="js/script.js"></script>
     <title>BIT BAR</title>
 </head>
 
 <body id="body">
     <!-- Aba inicial para ver quantas mesas e nome do restaurante -->
-    <h1>Monte seu restaurante</h1>
+    <!-- Aba inicial para ver quantas mesas e nome do restaurante -->
+    <h1 id="tituloRestaurante">Monte seu estabelecimento</h1>
     <div class="mesas">
-        <p>Quantas mesas seu restaurante tem? 1 a 50 </p><input type="number" id="numMesas">
+        <p>Quantas mesas seu restaurante tem? 1 a 50 </p>
+        Nº Mesas <input type="number" id="numMesas"> <br><br>
+        Tipo do estabelecimento
+        <select id="tipoEstab">
+            <option value="Churrascaria">Churrascaria</option>
+            <option value="Pizzaria">Pizzaria</option>
+            <option value="Lanchonete">Lanchonete</option>
+            <option value="Sushi">Sushi</option>
+            <option value="Cafeteria">Cafeteria</option>
+            <option value="Sorveteria">Sorveteria</option>
+            <option value="Hamburgueria">Hamburgueria</option>
+            <option value="Bar">Bar</option>
+            <option value="PUB">PUB</option>
+            <option value="Boteco">Boteco</option>
+            <option value="Pastelaria">Pastelaria</option>
+        </select>
+
+        <select id="artigo">
+            <option value="do">do</option>
+            <option value="da">da</option>
+        </select>
+        <br><br>
+        Nome do estabelecimento <input type="text" id="nomeEstab"> <br><br>
         <input type="button" value="Enviar" onclick="qntMesas();">
     </div>
 
@@ -22,13 +47,13 @@
     <div class="produtos">
         <ul class="lista">
             <li style="background-color: dimgray;opacity: 0.6;">
-                <h2>ADICIONAR PRODUTOS</a></h2>
-            </li>
-            <li>
-                <h2 onclick="irMesas();">Mesas</h2>
+                <h2 onclick="irProdutos()">Produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar();">Comandar</h2>
+            </li>
+            <li>
+                <h2 onclick="irMesas();">Mesas</h2>
             </li>
             <li>
                 <h2 onclick="infGeral()">Informações gerais</h2>
@@ -36,8 +61,8 @@
             <li>
                 <h2 onclick="extrato();">Controle financeiro</h2>
             </li>
-
         </ul>
+        <h2 class="pc">Adicionar Produtos</h2>
         <p>Nome do produto para cadastrar?</p> <input type="text" id="nomeProduto"><br><br>
         <p>Valor do produto?</p> <input type="number" id="precoProduto"><br><br>
         <input type="button" value="Cadastrar" onclick="adicionarProdutos();"><br><br>
@@ -52,18 +77,19 @@
         </table>
 
     </div>
+
     <!-- Aba das mesas -->
     <div class="todasAsMesas">
 
         <ul class="lista">
             <li>
-                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
-            </li>
-            <li style="background-color: dimgray;opacity: 0.6;">
-                <h2>Mesas</h2>
+                <h2 onclick="irProdutos()">Produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar();">Comandar</h2>
+            </li>
+            <li style="background-color: dimgray;opacity: 0.6;">
+                <h2>Mesas</h2>
             </li>
             <li>
                 <h2 onclick="infGeral()">Informações gerais</h2>
@@ -100,14 +126,15 @@
     <div class="comandar">
         <ul class="lista">
             <li>
-                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
-            </li>
-            <li>
-                <h2 onclick="irMesas();">Mesas</h2>
+                <h2 onclick="irProdutos()">Produtos</a></h2>
             </li>
             <li style="background-color: dimgray;opacity: 0.6;">
                 <h2>Comandar</h2>
             </li>
+            <li>
+                <h2 onclick="irMesas();">Mesas</h2>
+            </li>
+
             <li>
                 <h2 onclick="infGeral()">Informações gerais</h2>
             </li>
@@ -120,19 +147,19 @@
 
         </select>
         <br><br>
-        <input type="button" value="Lançar" onclick="lancarProduto();">
+        <input class="botaoLancar" type="button" value="Lançar" onclick="lancarProduto();">
     </div>
     <!-- Aba de informações Gerais -->
     <div class="informacoes">
         <ul class="lista">
             <li>
-                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
-            </li>
-            <li>
-                <h2 onclick="irMesas();">Mesas</h2>
+                <h2  onclick="irProdutos()">Produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar()">Comandar</h2>
+            </li>
+            <li>
+                <h2 onclick="irMesas();">Mesas</h2>
             </li>
             <li style="background-color: dimgray;opacity: 0.6;">
                 <h2 onclick="infGeral()">Informações gerais</h2>
@@ -168,14 +195,15 @@
     <div class="extrato">
         <ul class="lista">
             <li>
-                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
-            </li>
-            <li>
-                <h2 onclick="irMesas();">Mesas</h2>
+                <h2  onclick="irProdutos()">Produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar()">Comandar</h2>
             </li>
+            <li>
+                <h2 onclick="irMesas();">Mesas</h2>
+            </li>
+
             <li>
                 <h2 onclick="infGeral()">Informações gerais</h2>
             </li>
