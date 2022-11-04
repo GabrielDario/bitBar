@@ -20,17 +20,19 @@ h1 {
 }
 .pc {
     font-size: 30px;
-    color: beige;
+    color:rgb(0 153 255);
+
 }
 .lista h2 {
-    color: cornsilk;
+    color: rgb(0, 0, 0);
     font-family: CinzelDecorative-Regular;
 }
 .mesas p {
     font-family: CinzelDecorative-Regular;
 }
 p {
-    color: white;
+    color: rgb(245, 245, 245);
+    font-weight: bold;
 }
 td {
     padding: 0px 25px;
