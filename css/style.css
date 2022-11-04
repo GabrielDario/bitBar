@@ -1,7 +1,6 @@
 body {
     text-align: center;
     background-image: url("../img/background.webp");
-
     background-size: 1367px;
 }
 @font-face {
@@ -21,14 +20,18 @@ h1 {
 #tituloRestaurante {
     font-size: 80px;
 }
-.pc {
-    font-size: 30px;
-    color:rgb(0 153 255);
 
+input {
+    background: border-box;
+    font-size: 30px;
 }
 .lista h2 {
-    color: rgb(0, 0, 0);
-    font-family: CinzelDecorative-Regular;
+    color: black;
+
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 36px;
+
 }
 
 .mesas {
@@ -56,11 +59,6 @@ table {
     border: 1px solid black;
     display: inline-grid;
 }
-.mesas p {
-    font-size: 35px;
-    color: rgb(0, 153, 255);
-    font-weight: bold;
-}
 
 .produtos p {
     display: contents;
@@ -82,6 +80,10 @@ li:hover{
 }
 .comandar select,.botaoLancar,.comandar h3 {
     font-size: 25px;
+ }
+ .comandar h4 {
+    font-size: 30px;
+    color: white;
  }
 .todasAsMesas button {
     margin: 20px 20px;
@@ -121,15 +123,11 @@ li:hover{
     color: burlywood;
     font-size: 30px;
 }
-#valorArrecadado {
-    font-family: 'Silkscreen-Regular';
-    font-size: 40px;
-    color: mediumblue;
-}
-.informacoes h3 {
+
+.informacoes h3, .pc, #consultar, #valorArrecadado, .comandar h3, .mesas p{
     font-family: cursive;
     font-size: 40px;
-    color: ghostwhite;
+    color: darkblue;
 }
 .tm {
     background: darkkhaki;

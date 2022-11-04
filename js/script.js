@@ -443,7 +443,7 @@ function extrato() {
 
 
     //Inserir a variável valor total no htmk
-    valorTotal.textContent = `Valor bruto gerado :  R$ ${extratoGeral.toFixed(2)} Reais`;
+    valorTotal.textContent = `Valor bruto gerado: R$ ${extratoGeral.toFixed(2)} Reais`;
     dinheiroQnt.textContent = `${contDinheiro}`;
     qntCredito.textContent = `${contCred}`;
     qntDebito.textContent = `${contDeb}`;
