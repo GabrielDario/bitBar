@@ -26,6 +26,10 @@ h1 {
     color: cornsilk;
     font-family: CinzelDecorative-Regular;
 }
+.mesas {
+    color: #fffbfb;
+    font-size: 25px;
+}
 .mesas p {
     font-family: CinzelDecorative-Regular;
 }
