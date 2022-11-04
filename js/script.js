@@ -92,12 +92,13 @@ function irProdutos() {
     let produtos = document.querySelector(".produtos");
     let extrato = document.querySelector(".extrato");
     let informacoes = document.querySelector(".informacoes");
-
+ 
     comandar.style.display = "none";
     todasAsMesas.style.display = "none";
     extrato.style.display = "none";
     informacoes.style.display = "none";
     produtos.style.display = "block";
+ 
 }
 
 //Adicionando produtos na lista
@@ -115,7 +116,7 @@ function adicionarProdutos() {
         document.getElementById("precoProduto").value = ""; //deixando ele vazio
         nomeProduto = nomeProduto.toUpperCase(); //Convertendo para tudo maiusculo
 
-        produtosLista.push([nomeProduto]); //Adicionamento nome do produto em uma lista
+        produtosLista.push(nomeProduto); //Adicionamento nome do produto em uma lista
         precoLista.push([precoProduto]);//Adicionamento valor do produto em outra lista
 
         //Criando td e tr dentro da tabela(#tabela) já criada no html
@@ -150,7 +151,7 @@ function irMesas() {
     let comandar = document.querySelector(".comandar");
     let extrato = document.querySelector(".extrato");
     let informacoes = document.querySelector(".informacoes");
-
+ 
     extrato.style.display = "none";
     comandar.style.display = "none";
     mesas.style.display = "none";
@@ -327,6 +328,8 @@ function comandar() {
         let idProdutoNaLista = document.getElementById("produtoNaLista");
         let informacoes = document.querySelector(".informacoes");
 
+    
+
         numMesasHTML.style.display = "none";
         mesas.style.display = "none";
         extrato.style.display = "none";
@@ -366,6 +369,7 @@ function comandar() {
             option.text = produtosLista[produto];
             option.value = precoLista[produto];
             idProdutoNaLista.add(option);
+     
             contadorComandar = contadorProdutos;
         }
     }
@@ -415,6 +419,7 @@ function extrato() {
     let extrato = document.querySelector(".extrato");
     let informacoes = document.querySelector(".informacoes");
 
+
     let valorTotal = document.getElementById("valorArrecadado");
 
     let dinheiroQnt = document.getElementById("dinheiroQnt");
@@ -435,6 +440,7 @@ function extrato() {
     numMesasHTML.style.display = "none";
     informacoes.style.display = "none";
     extrato.style.display = "block";
+
 
     //Inserir a variável valor total no htmk
     valorTotal.textContent = `Valor bruto gerado :  R$ ${extratoGeral.toFixed(2)} Reais`;
@@ -461,6 +467,15 @@ function infGeral() {
     let comandar = document.querySelector(".comandar");
     let extrato = document.querySelector(".extrato");
 
+    let informacoes = document.querySelector(".informacoes");
+    informacoes.style.display = "block";
+    comandar.style.display = "none";
+    mesas.style.display = "none";
+    produtos.style.display = "none";
+    numMesasHTML.style.display = "none";
+    extrato.style.display = "none";
+
+
     let ticketMedio = document.getElementById("ticketMedio");
     let qntCom10 = document.getElementById("qntCom10");
     let qntSem10 = document.getElementById("qntSem10");
@@ -471,13 +486,6 @@ function infGeral() {
     mudarAba
     let tm; //ticket médio
 
-    let informacoes = document.querySelector(".informacoes");
-    informacoes.style.display = "block";
-    comandar.style.display = "none";
-    mesas.style.display = "none";
-    produtos.style.display = "none";
-    numMesasHTML.style.display = "none";
-    extrato.style.display = "none";
 
     //Ticket médio calculo somar tudo e dividir
     tm = extratoGeral / (contDinheiro + contCred + contDeb + contPix + contCheque);
@@ -501,14 +509,10 @@ function infGeral() {
     let porcentagemSem = calculo * naoPagouTaxa;
 
     if (isNaN(porcentagemCom)) {
-        console.log("É nulo");
-        porcentagemCom = 0;
-
+        porcentagemCom = 0
     }
     if (isNaN(porcentagemSem)) {
-        console.log("É nulo");
         porcentagemSem = 0;
-
     }
     porcCom10.textContent = `${porcentagemCom.toFixed(2)}% Gostaram do atendimento`;
     porcSem10.textContent = `${porcentagemSem.toFixed(2)}% Não gostaram do atendimento`;
