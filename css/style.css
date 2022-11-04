@@ -18,6 +18,9 @@ h1 {
     font-size: 70px;
     font-family: CinzelDecorative-Regular;
 }
+#tituloRestaurante {
+    font-size: 80px;
+}
 .pc {
     font-size: 30px;
     color: beige;
@@ -33,6 +36,10 @@ h1 {
 }
 .mesas p {
     font-family: CinzelDecorative-Regular;
+}
+.mesas input {
+    width: 120px;
+    height: 40px;
 }
 p {
     color: white;
@@ -72,7 +79,7 @@ li:hover{
     opacity: 0.6;
 }
 .comandar select,.botaoLancar,.comandar h3 {
-    font-size: 30px;
+    font-size: 25px;
  }
 .todasAsMesas button {
     margin: 20px 20px;
@@ -106,7 +113,7 @@ li:hover{
     font-size: 28px;
 }
 .buttonMesa {
-    width: 30px;
+    width: 50px;
 }
 .extrato h3 {
     color: burlywood;
