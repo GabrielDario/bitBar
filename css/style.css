@@ -47,6 +47,7 @@ table {
     color: rgb(0, 153, 255);
     font-weight: bold;
 }
+
 .produtos p {
     display: contents;
     font-size: 20px;
@@ -65,14 +66,21 @@ li:hover{
     background-color: dimgray;
     opacity: 0.6;
 }
+.comandar select,.botaoLancar,.comandar h3 {
+    font-size: 30px;
+ }
 .todasAsMesas button {
     margin: 20px 20px;
     height: 45px;
     width: 45px;
 }
+
+
 .todasAsMesas h3, .comandar h3 {
     color: white;
 }
+
+
 .todasAsMesas p {
     color: white;
     font-size: 20px;
