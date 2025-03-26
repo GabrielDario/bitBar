@@ -27,13 +27,15 @@ let valDeb = 0;
 let valPix = 0;
 let valCheque = 0;
 //Audio
-let caixaregistradora = new Audio('sounds/cashRegister.mp3');
-let audioConfirmLancar = new Audio('sounds/positive.wav');
+
+let audioDinheiro = new Audio('sons/dinheiro.wav');
+let audioConfirmLancar = new Audio('sons/audioConfirmLancar.wav');
 let audioError = new Audio('sons/error.wav');
-let fecharMesaSOM = new Audio('sounds/dinheiro.wav');
+let fecharMesaSOM = new Audio('sons/fecharMesa.wav');
 let addProduto = new Audio('sons/addProduto.wav');
-let mudarAba = new Audio('sounds/aba.wav');
-let vazia = new Audio('sounds/error.wav');
+let mudarAba = new Audio('sons/change.wav');
+let vazia = new Audio('sons/vazia.wav');
+
 //Função para saber quantas mesas serão adicionadas
 function qntMesas() {
     //elementos HTML que quero manipular (mostrar,não mostrar...)
@@ -215,7 +217,7 @@ function fecharMesa() {
     }
 
 }
-
+//Contador de método de pagamento e valor total por pagamento
 function verificarPagamento(extratoGeral) {
     let pagamento = document.getElementById("pagamento").value;
     if (pagamento == 1) {
@@ -405,7 +407,7 @@ function lancarProduto() {
 }
 //Abrir Controle Financeiro
 function extrato() {
-    caixaregistradora.play();
+    audioDinheiro.play();
     let numMesasHTML = document.querySelector(".todasAsMesas");
     let mesas = document.querySelector(".mesas");
     let produtos = document.querySelector(".produtos");
@@ -511,5 +513,6 @@ function infGeral() {
     porcCom10.textContent = `${porcentagemCom.toFixed(2)}% Gostaram do atendimento`;
     porcSem10.textContent = `${porcentagemSem.toFixed(2)}% Não gostaram do atendimento`;
 
+    
 
 }

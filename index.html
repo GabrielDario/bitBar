@@ -13,7 +13,6 @@
 
 <body id="body">
     <!-- Aba inicial para ver quantas mesas e nome do restaurante -->
-    <!-- Aba inicial para ver quantas mesas e nome do restaurante -->
     <h1 id="tituloRestaurante">Monte seu estabelecimento</h1>
     <div class="mesas">
         <p>Quantas mesas seu restaurante tem? 1 a 50 </p>
@@ -32,7 +31,7 @@
             <option value="Boteco">Boteco</option>
             <option value="Pastelaria">Pastelaria</option>
         </select>
-
+       
         <select id="artigo">
             <option value="do">do</option>
             <option value="da">da</option>
@@ -46,7 +45,7 @@
     <div class="produtos">
         <ul class="lista">
             <li style="background-color: dimgray;opacity: 0.6;">
-                <h2 onclick="irProdutos()">Produtos</a></h2>
+                <h2>Adicionar Produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar();"><b>Comandar</b></h2>
@@ -60,8 +59,8 @@
             <li>
                 <h2 onclick="extrato();">Controle financeiro</h2>
             </li>
+
         </ul>
-        <h2 class="pc">Adicionar Produtos</h2>
         <p>Nome do produto para cadastrar?</p> <input type="text" id="nomeProduto"><br><br>
         <p>Valor do produto?</p> <input type="number" id="precoProduto"><br><br>
         <input type="button" value="Cadastrar" onclick="adicionarProdutos();"><br><br>
@@ -76,13 +75,12 @@
         </table>
 
     </div>
-
     <!-- Aba das mesas -->
     <div class="todasAsMesas">
 
         <ul class="lista">
             <li>
-                <h2 onclick="irProdutos()">Produtos</a></h2>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar();">Comandar</h2>
@@ -126,7 +124,7 @@
        
         <ul class="lista">
             <li>
-                <h2 onclick="irProdutos()">Produtos</a></h2>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li style="background-color: dimgray;opacity: 0.6;">
                 <h2>Comandar</h2>
@@ -148,13 +146,13 @@
 
         </select>
         <br><br>
-        <input class="botaoLancar" type="button" value="Lançar" onclick="lancarProduto();">
+        <input type="button" value="Lançar" onclick="lancarProduto();">
     </div>
     <!-- Aba de informações Gerais -->
     <div class="informacoes">
         <ul class="lista">
             <li>
-                <h2  onclick="irProdutos()">Produtos</a></h2>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar()">Comandar</h2>
@@ -196,7 +194,7 @@
     <div class="extrato">
         <ul class="lista">
             <li>
-                <h2  onclick="irProdutos()">Produtos</a></h2>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar()">Comandar</h2>

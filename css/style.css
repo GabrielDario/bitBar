@@ -1,7 +1,7 @@
 body {
     text-align: center;
     background-image: url("../img/background.webp");
-    background-size: 1367px;
+    background-size: 1319px;
 }
 @font-face {
     font-family: CinzelDecorative-Regular;
@@ -33,11 +33,6 @@ input {
     font-size: 36px;
 
 }
-
-.mesas {
-    color: #fffbfb;
-    font-size: 25px;
-}
 .mesas p {
     font-family: CinzelDecorative-Regular;
 }
@@ -60,6 +55,16 @@ table {
     display: inline-grid;
 }
 
+.mesas p {
+    font-size: 35px;
+    color: rgb(190, 16, 16);
+    font-weight: bold;
+}
+.mesas {
+    color: white;
+    font-size: 20px;
+}
+
 .produtos p {
     display: contents;
     font-size: 20px;
@@ -78,6 +83,7 @@ li:hover{
     background-color: dimgray;
     opacity: 0.6;
 }
+
 .comandar select,.botaoLancar,.comandar h3 {
     font-size: 25px;
  }
@@ -90,13 +96,9 @@ li:hover{
     height: 45px;
     width: 45px;
 }
-
-
 .todasAsMesas h3, .comandar h3 {
     color: white;
 }
-
-
 .todasAsMesas p {
     color: white;
     font-size: 20px;
