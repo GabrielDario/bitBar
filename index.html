@@ -6,14 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
     <script src="js/script.js"></script>
     <title>BIT BAR</title>
 </head>
 
 <body id="body">
-    <!-- Aba inicial para ver quantas mesas e nome do restaurante -->
     <!-- Aba inicial para ver quantas mesas e nome do restaurante -->
     <h1 id="tituloRestaurante">Monte seu estabelecimento</h1>
     <div class="mesas">
@@ -33,7 +30,7 @@
             <option value="Boteco">Boteco</option>
             <option value="Pastelaria">Pastelaria</option>
         </select>
-
+       
         <select id="artigo">
             <option value="do">do</option>
             <option value="da">da</option>
@@ -47,7 +44,7 @@
     <div class="produtos">
         <ul class="lista">
             <li style="background-color: dimgray;opacity: 0.6;">
-                <h2 onclick="irProdutos()">Produtos</a></h2>
+                <h2>Adicionar Produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar();">Comandar</h2>
@@ -61,8 +58,8 @@
             <li>
                 <h2 onclick="extrato();">Controle financeiro</h2>
             </li>
+
         </ul>
-        <h2 class="pc">Adicionar Produtos</h2>
         <p>Nome do produto para cadastrar?</p> <input type="text" id="nomeProduto"><br><br>
         <p>Valor do produto?</p> <input type="number" id="precoProduto"><br><br>
         <input type="button" value="Cadastrar" onclick="adicionarProdutos();"><br><br>
@@ -77,13 +74,12 @@
         </table>
 
     </div>
-
     <!-- Aba das mesas -->
     <div class="todasAsMesas">
 
         <ul class="lista">
             <li>
-                <h2 onclick="irProdutos()">Produtos</a></h2>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar();">Comandar</h2>
@@ -126,7 +122,7 @@
     <div class="comandar">
         <ul class="lista">
             <li>
-                <h2 onclick="irProdutos()">Produtos</a></h2>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li style="background-color: dimgray;opacity: 0.6;">
                 <h2>Comandar</h2>
@@ -147,13 +143,13 @@
 
         </select>
         <br><br>
-        <input class="botaoLancar" type="button" value="Lançar" onclick="lancarProduto();">
+        <input type="button" value="Lançar" onclick="lancarProduto();">
     </div>
     <!-- Aba de informações Gerais -->
     <div class="informacoes">
         <ul class="lista">
             <li>
-                <h2  onclick="irProdutos()">Produtos</a></h2>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar()">Comandar</h2>
@@ -195,7 +191,7 @@
     <div class="extrato">
         <ul class="lista">
             <li>
-                <h2  onclick="irProdutos()">Produtos</a></h2>
+                <h2 onclick="irProdutos();">Adicionar produtos</a></h2>
             </li>
             <li>
                 <h2 onclick="comandar()">Comandar</h2>
