@@ -27,6 +27,7 @@ let valDeb = 0;
 let valPix = 0;
 let valCheque = 0;
 //Audio
+
 let audioDinheiro = new Audio('sons/dinheiro.wav');
 let audioConfirmLancar = new Audio('sons/audioConfirmLancar.wav');
 let audioError = new Audio('sons/error.wav');
@@ -34,6 +35,7 @@ let fecharMesaSOM = new Audio('sons/fecharMesa.wav');
 let addProduto = new Audio('sons/addProduto.wav');
 let mudarAba = new Audio('sons/change.wav');
 let vazia = new Audio('sons/vazia.wav');
+
 //Função para saber quantas mesas serão adicionadas
 function qntMesas() {
     //elementos HTML que quero manipular (mostrar,não mostrar...)

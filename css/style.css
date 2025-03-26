@@ -1,7 +1,6 @@
 body {
     text-align: center;
     background-image: url("../img/background.webp");
-
     background-size: 1319px;
 }
 @font-face {
@@ -18,19 +17,32 @@ h1 {
     font-size: 70px;
     font-family: CinzelDecorative-Regular;
 }
-.pc {
+#tituloRestaurante {
+    font-size: 80px;
+}
+
+input {
+    background: border-box;
     font-size: 30px;
-    color: beige;
 }
 .lista h2 {
-    color: cornsilk;
-    font-family: CinzelDecorative-Regular;
+    color: black;
+
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 36px;
+
 }
 .mesas p {
     font-family: CinzelDecorative-Regular;
 }
+.mesas input {
+    width: 120px;
+    height: 40px;
+}
 p {
-    color: white;
+    color: rgb(245, 245, 245);
+    font-weight: bold;
 }
 td {
     padding: 0px 25px;
@@ -42,6 +54,7 @@ table {
     border: 1px solid black;
     display: inline-grid;
 }
+
 .mesas p {
     font-size: 35px;
     color: rgb(190, 16, 16);
@@ -51,6 +64,7 @@ table {
     color: white;
     font-size: 20px;
 }
+
 .produtos p {
     display: contents;
     font-size: 20px;
@@ -69,6 +83,14 @@ li:hover{
     background-color: dimgray;
     opacity: 0.6;
 }
+
+.comandar select,.botaoLancar,.comandar h3 {
+    font-size: 25px;
+ }
+ .comandar h4 {
+    font-size: 30px;
+    color: white;
+ }
 .todasAsMesas button {
     margin: 20px 20px;
     height: 45px;
@@ -97,21 +119,17 @@ li:hover{
     font-size: 28px;
 }
 .buttonMesa {
-    width: 30px;
+    width: 50px;
 }
 .extrato h3 {
     color: burlywood;
     font-size: 30px;
 }
-#valorArrecadado {
-    font-family: 'Silkscreen-Regular';
-    font-size: 40px;
-    color: mediumblue;
-}
-.informacoes h3 {
+
+.informacoes h3, .pc, #consultar, #valorArrecadado, .comandar h3, .mesas p{
     font-family: cursive;
     font-size: 40px;
-    color: ghostwhite;
+    color: darkblue;
 }
 .tm {
     background: darkkhaki;
